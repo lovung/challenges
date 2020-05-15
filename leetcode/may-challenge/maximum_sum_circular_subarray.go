@@ -1,4 +1,4 @@
-package may-challenge
+package maychallenge
 
 import "fmt"
 import "math"
