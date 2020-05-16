@@ -1,0 +1,17 @@
+language: go
+install: true
+cache:
+  directories:
+    - $HOME/.cache/go-build
+    - $GOPATH/pkg/mod
+go:
+  - 1.14.x
+script:
+  - go get -v -t -d ./...
+  - go test -v ./...
+env:
+  global:
+    - GOPROXY=https://proxy.golang.org
+    - GO111MODULE=on
+    - GOARCH=amd64
+    - GO_FOR_RELEASE=1.14
