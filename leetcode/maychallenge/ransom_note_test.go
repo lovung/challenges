@@ -36,6 +36,14 @@ func Test_canConstruct(t *testing.T) {
 			},
 			want: true,
 		},
+		{
+			name: "test 4",
+			args: args{
+				ransomNote: "aabb",
+				magazine:   "aab",
+			},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

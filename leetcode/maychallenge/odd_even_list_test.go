@@ -18,9 +18,9 @@ func Test_oddEvenList(t *testing.T) {
 		{
 			name: "test 1",
 			args: args{
-				head: nil,
+				head: newListNode([]int{}),
 			},
-			want: nil,
+			want: newListNode([]int{}),
 		},
 		{
 			name: "test 2",
@@ -35,6 +35,13 @@ func Test_oddEvenList(t *testing.T) {
 				head: newListNode([]int{1, 2, 3, 4, 5, 6}),
 			},
 			want: newListNode([]int{1, 3, 5, 2, 4, 6}),
+		},
+		{
+			name: "test 4",
+			args: args{
+				head: newListNode([]int{1}),
+			},
+			want: newListNode([]int{1}),
 		},
 	}
 	for _, tt := range tests {
