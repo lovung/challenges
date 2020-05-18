@@ -50,7 +50,7 @@ func Test_isCousins(t *testing.T) {
 				x:    5,
 				y:    4,
 			},
-			want: true,
+			want: false,
 		},
 	}
 	for _, tt := range tests {

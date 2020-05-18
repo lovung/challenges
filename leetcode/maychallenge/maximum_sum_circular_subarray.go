@@ -1,6 +1,6 @@
 package maychallenge
 
-import "fmt"
+// import "fmt"
 import "math"
 
 /*
@@ -13,7 +13,7 @@ func maxSubarraySumCircular(A []int) int {
 	minSum := 0
 	min := math.MaxInt64
 	total := 0
-	fmt.Println(A)
+	// fmt.Println(A)
 	for _, e := range A {
 		maxSum += e
 		if maxSum < e {
