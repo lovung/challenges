@@ -1,5 +1,9 @@
 package maychallenge
 
+/*
+ * Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3333/
+ */
+
 func checkInclusion(s1 string, s2 string) bool {
 	const a = 'a'
 	lS1 := len(s1)

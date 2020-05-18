@@ -1,5 +1,9 @@
 package maychallenge
 
+/*
+ * Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3318/
+ */
+
 func canConstruct(ransomNote string, magazine string) bool {
 	lenRansomNote := len(ransomNote)
 	lenMagazine := len(magazine)
