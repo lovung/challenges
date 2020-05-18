@@ -34,16 +34,17 @@ func newBinaryTree(nums []*int) *TreeNode {
 		if nums[i] == nil {
 			continue
 		}
+		parrent = stack[(i+1)>>1-1]
+		if parrent == nil {
+			continue
+		}
 		newNode := &TreeNode{
 			Val:   *nums[i],
 			Left:  nil,
 			Right: nil,
 		}
 		stack[i] = newNode
-		parrent = stack[(i+1)/2-1]
-		if parrent == nil {
-			continue
-		}
+
 		if i%2 == 1 {
 			parrent.Left = newNode
 		} else {

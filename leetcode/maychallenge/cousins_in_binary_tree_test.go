@@ -34,6 +34,24 @@ func Test_isCousins(t *testing.T) {
 			},
 			want: true,
 		},
+		{
+			name: "test 3",
+			args: args{
+				root: newBinaryTree([]*int{}),
+				x:    0,
+				y:    0,
+			},
+			want: false,
+		},
+		{
+			name: "test 4",
+			args: args{
+				root: newBinaryTree([]*int{&nums[1], nil, &nums[3], nil, &nums[4], nil, &nums[5]}),
+				x:    5,
+				y:    4,
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
