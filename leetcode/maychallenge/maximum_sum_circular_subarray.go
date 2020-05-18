@@ -1,7 +1,11 @@
 package maychallenge
 
-import "fmt"
+// import "fmt"
 import "math"
+
+/*
+ * Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3330/
+ */
 
 func maxSubarraySumCircular(A []int) int {
 	maxSum := 0
@@ -9,7 +13,7 @@ func maxSubarraySumCircular(A []int) int {
 	minSum := 0
 	min := math.MaxInt64
 	total := 0
-	fmt.Println(A)
+	// fmt.Println(A)
 	for _, e := range A {
 		maxSum += e
 		if maxSum < e {

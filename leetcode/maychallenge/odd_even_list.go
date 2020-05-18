@@ -1,5 +1,9 @@
 package maychallenge
 
+/*
+ * Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3331/
+ */
+
 func oddEvenList(head *ListNode) *ListNode {
 	if head == nil {
 		return head

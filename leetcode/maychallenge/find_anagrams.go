@@ -1,5 +1,9 @@
 package maychallenge
 
+/*
+ * Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3332/
+ */
+
 func findAnagrams(s string, p string) []int {
 	const a = 'a'
 	lS := len(s)

@@ -1,5 +1,9 @@
 package maychallenge
 
+/*
+ * Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3321/
+ */
+
 func majorityElement(nums []int) int {
 	// Solution MM
 	// mm := make(map[int]int)
