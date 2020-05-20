@@ -22,7 +22,7 @@ func kthSmallest(root *TreeNode, k int) int {
 		if popedStack {
 			k--
 			if k == 0 {
-				return worker.Val
+				break
 			}
 			if worker.Right == nil {
 				worker = (stack.pop()).(*TreeNode)
@@ -42,7 +42,7 @@ func kthSmallest(root *TreeNode, k int) int {
 		if worker.Right == nil {
 			k--
 			if k == 0 {
-				return worker.Val
+				break
 			}
 			worker = (stack.pop()).(*TreeNode)
 			popedStack = true
@@ -50,7 +50,7 @@ func kthSmallest(root *TreeNode, k int) int {
 		}
 		k--
 		if k == 0 {
-			return worker.Val
+			break
 		}
 		worker = worker.Right
 		popedStack = false

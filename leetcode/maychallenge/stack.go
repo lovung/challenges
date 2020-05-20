@@ -19,12 +19,12 @@ func NewStack(n int) *Stack {
 	}
 }
 
-func (s *Stack) print() {
-	for i := 0; i < s.count; i++ {
-		fmt.Printf("%v->", s.stack[i])
-	}
-	fmt.Println()
-}
+// func (s *Stack) print() {
+// 	for i := 0; i < s.count; i++ {
+// 		fmt.Printf("%v->", s.stack[i])
+// 	}
+// 	fmt.Println()
+// }
 
 func (s *Stack) push(n interface{}) error {
 	if s.count == s.size {
@@ -45,24 +45,24 @@ func (s *Stack) pop() interface{} {
 	return out
 }
 
-func (s *Stack) top() interface{} {
-	if s.count == 0 {
-		return nil
-	}
-	return s.stack[s.count-1]
-}
+// func (s *Stack) top() interface{} {
+// 	if s.count == 0 {
+// 		return nil
+// 	}
+// 	return s.stack[s.count-1]
+// }
 
-func (s *Stack) bottom() interface{} {
-	if len(s.stack) == 0 {
-		return nil
-	}
-	return s.stack[0]
-}
+// func (s *Stack) bottom() interface{} {
+// 	if len(s.stack) == 0 {
+// 		return nil
+// 	}
+// 	return s.stack[0]
+// }
 
-func (s *Stack) getCount() int {
-	return s.count
-}
+// func (s *Stack) getCount() int {
+// 	return s.count
+// }
 
-func (s *Stack) getSize() int {
-	return s.size
-}
+// func (s *Stack) getSize() int {
+// 	return s.size
+// }
