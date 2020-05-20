@@ -1,6 +1,6 @@
 package maychallenge
 
-import "fmt"
+// import "fmt"
 import "errors"
 
 // Stack the stack to save k first node
