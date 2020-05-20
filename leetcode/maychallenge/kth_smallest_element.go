@@ -1,8 +1,8 @@
 package maychallenge
 
-import (
-	"fmt"
-)
+// import (
+// 	"fmt"
+// )
 
 /**
  * Definition for a binary tree node.
@@ -17,7 +17,7 @@ func kthSmallest(root *TreeNode, k int) int {
 	worker := root
 	popedStack := false
 	for k > 0 && worker != nil {
-		fmt.Printf("worker value: %v. Pop?: %v\n", worker.Val, popedStack)
+		// fmt.Printf("worker value: %v. Pop?: %v\n", worker.Val, popedStack)
 		if popedStack {
 			k--
 			if k == 0 {
