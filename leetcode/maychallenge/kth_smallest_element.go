@@ -14,7 +14,7 @@ package maychallenge
  * }
  */
 func kthSmallest(root *TreeNode, k int) int {
-	stack := NewStack(100)
+	stack := NewStack(k)
 	worker := root
 	popedStack := false
 	for k > 0 && worker != nil {
