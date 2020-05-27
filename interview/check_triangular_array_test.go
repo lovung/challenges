@@ -60,6 +60,13 @@ func Test_checkTriangularArray(t *testing.T) {
 			},
 			want: false,
 		},
+		{
+			name: "test 8",
+			args: args{
+				nums: []int{1, 3, 5, 7, 9, 8, 6, 4, 5, 0},
+			},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
