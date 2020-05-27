@@ -5,8 +5,8 @@ func findMaxLength(nums []int) int {
 	prefixSum := make([]int, n+1)
 	counted := make(map[int]bool)
 	sum := 0
-	for i, e := range nums {
-		if e == 0 {
+	for i := 0; i < n; i++ {
+		if nums[i] == 0 {
 			sum--
 		} else {
 			sum++
@@ -14,7 +14,7 @@ func findMaxLength(nums []int) int {
 		prefixSum[i+1] = sum
 	}
 	max := 0
-	for i := 0; i <= n; i++ {
+	for i := 0; i <= n-max; i++ {
 		if counted[prefixSum[i]] {
 			continue
 		}
