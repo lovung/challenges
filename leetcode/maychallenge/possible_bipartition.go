@@ -2,31 +2,31 @@ package maychallenge
 
 // import "errors"
 
-// func possibleBipartition(N int, dislikes [][]int) bool {
-// 	var (
-// 		m     = len(dislikes)
-// 		gA    = make([]bool, N+1)
-// 		gB    = make([]bool, N+1)
-// 		queue = Queue{}
-// 		first = true
-// 	)
-// 	for i := 0; i < m; i++ {
-// 		err := process(gA, gB, dislikes[i], &queue, &first)
-// 		if err != nil {
-// 			return false
-// 		}
-// 	}
-// 	for queue.count() > 0 {
-// 		pair := queue.peek()
-// 		err := process2(gA, gB, pair, &queue)
-// 		if err != nil {
-// 			return false
-// 		}
-// 		queue.pop()
-// 	}
-// 	return true
+func possibleBipartition(N int, dislikes [][]int) bool {
+	// 	var (
+	// 		m     = len(dislikes)
+	// 		gA    = make([]bool, N+1)
+	// 		gB    = make([]bool, N+1)
+	// 		queue = Queue{}
+	// 		first = true
+	// 	)
+	// 	for i := 0; i < m; i++ {
+	// 		err := process(gA, gB, dislikes[i], &queue, &first)
+	// 		if err != nil {
+	// 			return false
+	// 		}
+	// 	}
+	// 	for queue.count() > 0 {
+	// 		pair := queue.peek()
+	// 		err := process2(gA, gB, pair, &queue)
+	// 		if err != nil {
+	// 			return false
+	// 		}
+	// 		queue.pop()
+	// 	}
+	// 	return true
 
-// }
+}
 
 // func process(gA, gB []bool, pair []int, queue *Queue, first *bool) error {
 // 	if gA[pair[0]] && gA[pair[1]] {
