@@ -16,7 +16,7 @@ func Test_findJudge(t *testing.T) {
 			name: "test 1",
 			args: args{
 				N:     2,
-				trust: [][]int{[]int{1, 2}},
+				trust: [][]int{{1, 2}},
 			},
 			want: 2,
 		},
@@ -24,7 +24,7 @@ func Test_findJudge(t *testing.T) {
 			name: "test 2",
 			args: args{
 				N:     3,
-				trust: [][]int{[]int{1, 3}, []int{2, 3}},
+				trust: [][]int{{1, 3}, {2, 3}},
 			},
 			want: 3,
 		},
@@ -32,7 +32,7 @@ func Test_findJudge(t *testing.T) {
 			name: "test 3",
 			args: args{
 				N:     3,
-				trust: [][]int{[]int{1, 3}, []int{2, 3}, []int{3, 1}},
+				trust: [][]int{{1, 3}, {2, 3}, {3, 1}},
 			},
 			want: -1,
 		},
@@ -40,7 +40,7 @@ func Test_findJudge(t *testing.T) {
 			name: "test 4",
 			args: args{
 				N:     3,
-				trust: [][]int{[]int{1, 2}, []int{2, 3}},
+				trust: [][]int{{1, 2}, {2, 3}},
 			},
 			want: -1,
 		},
@@ -48,7 +48,7 @@ func Test_findJudge(t *testing.T) {
 			name: "test 5",
 			args: args{
 				N:     4,
-				trust: [][]int{[]int{1, 3}, []int{1, 4}, []int{2, 3}, []int{2, 4}, []int{4, 3}},
+				trust: [][]int{{1, 3}, {1, 4}, {2, 3}, {2, 4}, {4, 3}},
 			},
 			want: 3,
 		},
