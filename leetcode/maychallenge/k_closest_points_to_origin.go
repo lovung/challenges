@@ -2,6 +2,7 @@ package maychallenge
 
 import "sort"
 
+// Link: https://leetcode.com/problems/k-closest-points-to-origin/submissions/
 func kClosest(points [][]int, K int) [][]int {
 	var (
 		n        = len(points)
