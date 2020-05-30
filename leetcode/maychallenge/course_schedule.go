@@ -1,5 +1,6 @@
 package maychallenge
 
+// Link: https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/538/week-5-may-29th-may-31st/3344/
 func canFinish(numCourses int, prerequisites [][]int) bool {
 	var (
 		graph = make([][]int, numCourses)
