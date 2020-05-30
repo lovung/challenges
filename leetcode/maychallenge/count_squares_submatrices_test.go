@@ -14,14 +14,14 @@ func Test_countSquares(t *testing.T) {
 		{
 			name: "test 1",
 			args: args{
-				matrix: [][]int{[]int{0, 1, 1, 1}, []int{1, 1, 1, 1}, []int{0, 1, 1, 1}},
+				matrix: [][]int{{0, 1, 1, 1}, {1, 1, 1, 1}, {0, 1, 1, 1}},
 			},
 			want: 15,
 		},
 		{
 			name: "test 2",
 			args: args{
-				matrix: [][]int{[]int{1, 0, 1}, []int{1, 1, 0}, []int{1, 1, 0}},
+				matrix: [][]int{{1, 0, 1}, {1, 1, 0}, {1, 1, 0}},
 			},
 			want: 7,
 		},
