@@ -1,8 +1,8 @@
 package maychallenge
 
-import (
-	"fmt"
-)
+// import (
+// 	"fmt"
+// )
 
 // TreeNode in binary tree
 /* Definition for a binary tree node.
@@ -28,7 +28,7 @@ func newBinaryTree(nums []*int) *TreeNode {
 		parrent *TreeNode
 	)
 	stack[0] = head
-	fmt.Printf("head: %v, nums: %v\n", head.Val, *nums[0])
+	// fmt.Printf("head: %v, nums: %v\n", head.Val, *nums[0])
 
 	for i := 1; i < len(nums); i++ {
 		if nums[i] == nil {
@@ -50,7 +50,7 @@ func newBinaryTree(nums []*int) *TreeNode {
 		} else {
 			parrent.Right = newNode
 		}
-		fmt.Printf("parrent: %v, i: %v, nums: %v\n", parrent.Val, i, *nums[i])
+		// fmt.Printf("parrent: %v, i: %v, nums: %v\n", parrent.Val, i, *nums[i])
 	}
 	return head
 }
