@@ -36,7 +36,7 @@ func newBinaryTree(nums []*int) *TreeNode {
 		}
 		parrent = stack[(i+1)>>1-1]
 		if parrent == nil {
-			continue
+			return nil
 		}
 		newNode := &TreeNode{
 			Val:   *nums[i],
