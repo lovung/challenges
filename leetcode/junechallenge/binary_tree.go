@@ -1,4 +1,4 @@
-package maychallenge
+package junechallenge
 
 // import (
 // 	"fmt"
