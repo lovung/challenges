@@ -1,5 +1,7 @@
 package junechallenge
 
+import "sort"
+
 // PerPersonCost contains the cost and diff
 type PersonCost struct {
 	original []int
@@ -52,4 +54,24 @@ func partition(arr []PersonCost, l, r int) int {
 	arr[i+1] = arr[r]
 	arr[r] = tmp
 	return i + 1
+}
+
+func twoCitySchedCostV2(costs [][]int) int {
+	var (
+		n  = len(costs)
+		n2 = n / 2
+	)
+	sort.Slice(costs, func(i, j int) bool {
+		return costs[i][1]-costs[i][0] < costs[j][1]-costs[j][0]
+	})
+	totalCost := 0
+	for i, e := range costs {
+		if i < n2 {
+			totalCost += e[1]
+		} else {
+			totalCost += e[0]
+		}
+	}
+
+	return totalCost
 }
