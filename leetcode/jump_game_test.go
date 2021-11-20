@@ -22,4 +22,5 @@ func TestJumpGame2(t *testing.T) {
 	assert.Equal(t, 1, jumpGame2([]int{2, 0}))
 	assert.Equal(t, 1, jumpGame2([]int{2, 3, 1}))
 	assert.Equal(t, 3, jumpGame2([]int{1, 1, 1, 1}))
+	assert.Equal(t, 0, jumpGame2([]int{1}))
 }
