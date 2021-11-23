@@ -33,3 +33,38 @@ func jumpGame2(nums []int) int {
 	}
 	return jumpCount
 }
+
+// Jump Game 3
+func canReach(arr []int, start int) bool {
+	n := len(arr)
+	arriveCount := make([]int, n)
+	stack := make([]int, 0)
+
+	for i := start; arr[i] != 0; {
+		arriveCount[i]++
+		if arriveCount[i] >= 2 {
+			if len(stack) > 0 {
+				// go to the index from
+				i = stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+			} else {
+				return false
+			}
+		}
+		// try to go to the new place with Least Freq Arrive
+		if i+arr[i] < n && i-arr[i] >= 0 {
+			if arriveCount[i+arr[i]] < arriveCount[i-arr[i]] {
+				stack = append(stack, i-arr[i])
+				i = i + arr[i]
+			} else {
+				stack = append(stack, i+arr[i])
+				i = i - arr[i]
+			}
+		} else if i+arr[i] >= n && i-arr[i] >= 0 {
+			i = i - arr[i]
+		} else if i+arr[i] < n && i-arr[i] < 0 {
+			i = i + arr[i]
+		}
+	}
+	return true
+}
