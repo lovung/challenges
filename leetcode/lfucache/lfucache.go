@@ -1,7 +1,7 @@
 package lfucache
 
 type LFUCache struct {
-	list  *LFUDList
+	list  *lfuDList
 	cap   int
 	count int
 	m     map[int]*LFUDNode
@@ -10,7 +10,7 @@ type LFUCache struct {
 
 func Constructor(capacity int) LFUCache {
 	return LFUCache{
-		list:  &LFUDList{},
+		list:  &lfuDList{},
 		cap:   capacity,
 		m:     make(map[int]*LFUDNode),
 		cache: make(map[int]int),
@@ -24,7 +24,7 @@ func (this *LFUCache) Get(key int) int {
 	// find if present
 	node, ok := this.m[key]
 	if ok {
-		newNode, needUpdateHead := node.TouchKey(key)
+		newNode, needUpdateHead := node.touchKey(key)
 		if needUpdateHead {
 			this.list.head = newNode
 		}
@@ -44,7 +44,7 @@ func (this *LFUCache) Put(key int, value int) {
 		// present: update the value
 		this.cache[key] = value
 		// increase the count
-		newNode, needUpdateHead := node.TouchKey(key)
+		newNode, needUpdateHead := node.touchKey(key)
 		if needUpdateHead {
 			this.list.head = newNode
 		}
@@ -53,14 +53,14 @@ func (this *LFUCache) Put(key int, value int) {
 		// check capacity
 		if this.count == this.cap {
 			// remove the least used key
-			evictedKey := this.list.Evict()
+			evictedKey := this.list.evict()
 			this.count--
 			delete(this.cache, evictedKey)
 			delete(this.m, evictedKey)
 		}
 
 		this.count++
-		newNode := this.list.AddNewKey(key)
+		newNode := this.list.addKey(key)
 		this.m[key] = newNode
 		this.cache[key] = value
 	}
@@ -73,22 +73,22 @@ func (this *LFUCache) Put(key int, value int) {
  * obj.Put(key,value);
  */
 
-type LFUDList struct {
+type lfuDList struct {
 	head *LFUDNode
 }
 
-func (l *LFUDList) Evict() int {
+func (l *lfuDList) evict() int {
 	if l == nil || l.head == nil {
-		return -1
+		panic("invalid list")
 	}
 	if len(l.head.keys) == 1 {
 		// remove the head
 		key := l.head.keys[0]
 		if l.head.next == nil {
-			l.head.SelfRemove()
+			l.head.selfRemove()
 		} else {
 			newHead := l.head.next
-			l.head.SelfRemove()
+			l.head.selfRemove()
 			l.head = newHead
 		}
 		return key
@@ -99,9 +99,9 @@ func (l *LFUDList) Evict() int {
 	return key
 }
 
-func (l *LFUDList) AddNewKey(key int) *LFUDNode {
+func (l *lfuDList) addKey(key int) *LFUDNode {
 	if l == nil {
-		return nil
+		panic("invalid list")
 	}
 	if l.head == nil {
 		// create new node
@@ -113,14 +113,14 @@ func (l *LFUDList) AddNewKey(key int) *LFUDNode {
 		return &newNode
 	}
 	if l.head.freq == 1 {
-		return l.head.AddKey(key)
+		return l.head.addKey(key)
 	}
 	// create new node
 	newNode := LFUDNode{
 		freq: 1,
 		keys: []int{key},
 	}
-	l.head.InsertBefore(&newNode)
+	l.head.insertBefore(&newNode)
 	l.head = &newNode
 	return &newNode
 }
@@ -132,27 +132,27 @@ type LFUDNode struct {
 	next *LFUDNode
 }
 
-func (n *LFUDNode) InsertBefore(newNode *LFUDNode) {
-	if n == nil {
-		return
+func (n *LFUDNode) insertBefore(newNode *LFUDNode) {
+	if n == nil || newNode == nil {
+		panic("invalid node")
 	}
 	newNode.next = n
 	newNode.prev = n.prev
 	n.prev = newNode
 }
 
-func (n *LFUDNode) InsertAfter(newNode *LFUDNode) {
-	if n == nil {
-		return
+func (n *LFUDNode) insertAfter(newNode *LFUDNode) {
+	if n == nil || newNode == nil {
+		panic("invalid node")
 	}
 	newNode.prev = n
 	newNode.next = n.next
 	n.next = newNode
 }
 
-func (n *LFUDNode) SelfRemove() {
+func (n *LFUDNode) selfRemove() {
 	if n == nil {
-		return
+		panic("invalid node")
 	}
 	if n.prev != nil {
 		n.prev.next = n.next
@@ -162,18 +162,17 @@ func (n *LFUDNode) SelfRemove() {
 	}
 }
 
-func (n *LFUDNode) AddKey(key int) *LFUDNode {
+func (n *LFUDNode) addKey(key int) *LFUDNode {
 	if n == nil {
-		return nil
+		panic("invalid node")
 	}
 	n.keys = append(n.keys, key)
 	return n
 }
 
-func (n *LFUDNode) TouchKey(key int) (newNode *LFUDNode, needUpdateHead bool) {
+func (n *LFUDNode) touchKey(key int) (newNode *LFUDNode, needUpdateHead bool) {
 	if n == nil || len(n.keys) == 0 {
-		// should panic
-		return nil, false
+		panic("invalid node")
 	}
 	if len(n.keys) == 1 {
 		if n.next == nil || n.next.freq != n.freq+1 {
@@ -184,7 +183,7 @@ func (n *LFUDNode) TouchKey(key int) (newNode *LFUDNode, needUpdateHead bool) {
 			// need to update the head of list
 			next := n.next
 			next.keys = append(next.keys, key)
-			n.SelfRemove()
+			n.selfRemove()
 			return next, next.prev == nil
 		}
 	}
@@ -196,7 +195,7 @@ func (n *LFUDNode) TouchKey(key int) (newNode *LFUDNode, needUpdateHead bool) {
 					freq: n.freq + 1,
 					keys: []int{key},
 				}
-				n.InsertAfter(&newNode)
+				n.insertAfter(&newNode)
 				// remove the key here
 				n.keys = n.keys[:i+copy(n.keys[i:], n.keys[i+1:])]
 				return &newNode, false
@@ -209,5 +208,5 @@ func (n *LFUDNode) TouchKey(key int) (newNode *LFUDNode, needUpdateHead bool) {
 			}
 		}
 	}
-	return nil, false
+	panic("invalid case")
 }
