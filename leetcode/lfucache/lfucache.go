@@ -4,16 +4,14 @@ type LFUCache struct {
 	list  *lfuDList
 	cap   int
 	count int
-	m     map[int]*LFUDNode
-	cache map[int]int
+	items map[int]*storeItem
 }
 
 func Constructor(capacity int) LFUCache {
 	return LFUCache{
 		list:  &lfuDList{},
 		cap:   capacity,
-		m:     make(map[int]*LFUDNode),
-		cache: make(map[int]int),
+		items: make(map[int]*storeItem),
 	}
 }
 
@@ -22,14 +20,13 @@ func (this *LFUCache) Get(key int) int {
 		return -1
 	}
 	// find if present
-	node, ok := this.m[key]
+	item, ok := this.items[key]
 	if ok {
-		newNode, needUpdateHead := node.touchKey(key)
-		if needUpdateHead {
-			this.list.head = newNode
+		newHead := item.touch()
+		if newHead != nil {
+			this.list.head = newHead
 		}
-		this.m[key] = newNode
-		return this.cache[key]
+		return item.value
 	}
 	return -1
 }
@@ -39,51 +36,41 @@ func (this *LFUCache) Put(key int, value int) {
 		return
 	}
 	// find if present
-	node, ok := this.m[key]
+	item, ok := this.items[key]
 	if ok {
 		// present: update the value
-		this.cache[key] = value
+		item.value = value
 		// increase the count
-		newNode, needUpdateHead := node.touchKey(key)
-		if needUpdateHead {
-			this.list.head = newNode
+		newHead := item.touch()
+		if newHead != nil {
+			this.list.head = newHead
 		}
-		this.m[key] = newNode
-	} else {
-		// check capacity
-		if this.count == this.cap {
-			// remove the least used key
-			evictedKey := this.list.evict()
-			this.count--
-			delete(this.cache, evictedKey)
-			delete(this.m, evictedKey)
-		}
-
-		this.count++
-		newNode := this.list.addKey(key)
-		this.m[key] = newNode
-		this.cache[key] = value
+		return
 	}
-}
+	// not exist
+	// check capacity
+	if this.count == this.cap {
+		// remove the least used key
+		evictedItem := this.list.evict()
+		this.count--
+		delete(this.items, evictedItem.key)
+	}
 
-/**
- * Your LFUCache object will be instantiated and called as such:
- * obj := Constructor(capacity);
- * param_1 := obj.Get(key);
- * obj.Put(key,value);
- */
+	this.count++
+	this.items[key] = this.list.addItem(key, value)
+}
 
 type lfuDList struct {
-	head *LFUDNode
+	head *lfuDNode
 }
 
-func (l *lfuDList) evict() int {
-	if l == nil || l.head == nil {
-		panic("invalid list")
-	}
-	if len(l.head.keys) == 1 {
+// Assume:
+// * l != nil
+// * l.head != nil
+func (l *lfuDList) evict() *storeItem {
+	if l.head.headItem == l.head.tailItem {
 		// remove the head
-		key := l.head.keys[0]
+		item := l.head.headItem
 		if l.head.next == nil {
 			l.head.selfRemove()
 		} else {
@@ -91,122 +78,181 @@ func (l *lfuDList) evict() int {
 			l.head.selfRemove()
 			l.head = newHead
 		}
-		return key
+		return item
 	}
 	// remove the first key in head
-	key := l.head.keys[0]
-	l.head.keys = l.head.keys[1:]
-	return key
+	item := l.head.popHeadItem()
+	return item
 }
 
-func (l *lfuDList) addKey(key int) *LFUDNode {
-	if l == nil {
-		panic("invalid list")
+// Assume:
+// * l != nil
+func (l *lfuDList) addItem(key, value int) *storeItem {
+	item := &storeItem{
+		key:   key,
+		value: value,
 	}
 	if l.head == nil {
 		// create new node
-		newNode := LFUDNode{
-			freq: 1,
-			keys: []int{key},
+		newNode := &lfuDNode{
+			freq:     1,
+			headItem: item,
+			tailItem: item,
 		}
-		l.head = &newNode
-		return &newNode
+		item.pNode = newNode
+		l.head = newNode
+		return item
 	}
 	if l.head.freq == 1 {
-		return l.head.addKey(key)
+		l.head.addItem(item)
+		return item
 	}
 	// create new node
-	newNode := LFUDNode{
-		freq: 1,
-		keys: []int{key},
+	newNode := &lfuDNode{
+		freq:     1,
+		headItem: item,
+		tailItem: item,
 	}
-	l.head.insertBefore(&newNode)
-	l.head = &newNode
-	return &newNode
+	item.pNode = newNode
+	l.head.insertBefore(newNode)
+	l.head = newNode
+	return item
 }
 
-type LFUDNode struct {
-	freq int
-	keys []int // LRU queue (FIFO)
-	prev *LFUDNode
-	next *LFUDNode
+type lfuDNode struct {
+	freq     int
+	headItem *storeItem
+	tailItem *storeItem
+	prev     *lfuDNode
+	next     *lfuDNode
 }
 
-func (n *LFUDNode) insertBefore(newNode *LFUDNode) {
-	if n == nil || newNode == nil {
-		panic("invalid node")
-	}
+// Assume:
+// * n != nil
+// * newNode != nil
+func (n *lfuDNode) insertBefore(newNode *lfuDNode) {
 	newNode.next = n
 	newNode.prev = n.prev
 	n.prev = newNode
 }
 
-func (n *LFUDNode) insertAfter(newNode *LFUDNode) {
-	if n == nil || newNode == nil {
-		panic("invalid node")
-	}
+// Assume:
+// * n != nil
+// * newNode != nil
+func (n *lfuDNode) insertAfter(newNode *lfuDNode) {
 	newNode.prev = n
 	newNode.next = n.next
 	n.next = newNode
 }
 
-func (n *LFUDNode) selfRemove() {
-	if n == nil {
-		panic("invalid node")
-	}
+// Assume:
+// * n != nil
+func (n *lfuDNode) selfRemove() {
 	if n.prev != nil {
 		n.prev.next = n.next
 	}
 	if n.next != nil {
 		n.next.prev = n.prev
 	}
+	n.prev = nil
+	n.next = nil
 }
 
-func (n *LFUDNode) addKey(key int) *LFUDNode {
-	if n == nil {
-		panic("invalid node")
-	}
-	n.keys = append(n.keys, key)
+// Assume:
+// * n != nil
+func (n *lfuDNode) addItem(item *storeItem) *lfuDNode {
+	item.pNode = n
+	n.appendStoreItem(item)
 	return n
 }
 
-func (n *LFUDNode) touchKey(key int) (newNode *LFUDNode, needUpdateHead bool) {
-	if n == nil || len(n.keys) == 0 {
-		panic("invalid node")
+// Assume:
+// * n != nil
+func (n *lfuDNode) appendStoreItem(i *storeItem) {
+	i.pNode = n
+	i.prev = n.tailItem
+	n.tailItem.next = i
+	n.tailItem = i
+}
+
+// Assume:
+// * n != nil
+// * n.headItem != nil
+// * n.tailItem != nil
+// * n.headItem != n.tailItem
+func (n *lfuDNode) popHeadItem() *storeItem {
+	item := n.headItem
+	next := item.next
+	item.selfRemove()
+	n.headItem = next
+	return item
+}
+
+type storeItem struct {
+	key   int
+	value int
+	pNode *lfuDNode
+	prev  *storeItem
+	next  *storeItem
+}
+
+// Assume:
+// * i != nil
+// * i.pNode != nil
+func (i *storeItem) selfRemove() {
+	if i.prev != nil {
+		i.prev.next = i.next
+	} else if i.next != nil {
+		i.pNode.headItem = i.next
 	}
-	if len(n.keys) == 1 {
+	if i.next != nil {
+		i.next.prev = i.prev
+	} else if i.prev != nil {
+		i.pNode.tailItem = i.prev
+	}
+	i.prev = nil
+	i.next = nil
+}
+
+func (i *storeItem) touch() *lfuDNode {
+	n := i.pNode
+	// Only 1 item in the node
+	if n.headItem == n.tailItem {
+		// no next node or next node is far
 		if n.next == nil || n.next.freq != n.freq+1 {
 			n.freq++
-			return n, false
-		} else {
-			// move the item to next node
-			// need to update the head of list
-			next := n.next
-			next.keys = append(next.keys, key)
-			n.selfRemove()
-			return next, next.prev == nil
+			return nil
 		}
-	}
-	for i := range n.keys {
-		if n.keys[i] == key {
-			if n.next == nil || n.next.freq != n.freq+1 {
-				// create new node
-				newNode := LFUDNode{
-					freq: n.freq + 1,
-					keys: []int{key},
-				}
-				n.insertAfter(&newNode)
-				// remove the key here
-				n.keys = n.keys[:i+copy(n.keys[i:], n.keys[i+1:])]
-				return &newNode, false
-			} else {
-				// move the item to next node
-				n.next.keys = append(n.next.keys, key)
-				// remove the key here
-				n.keys = n.keys[:i+copy(n.keys[i:], n.keys[i+1:])]
-				return n.next, false
-			}
+		// move the item to next node
+		next := n.next
+		i.pNode = next
+		next.appendStoreItem(i)
+		n.selfRemove()
+		// need to update the head of list
+		if next.prev == nil {
+			return next
 		}
+		return nil
 	}
-	panic("invalid case")
+	// Many items in the node
+	if n.next == nil || n.next.freq != n.freq+1 {
+		// remove the key here
+		i.selfRemove()
+		// create new node
+		newNode := lfuDNode{
+			freq:     n.freq + 1,
+			headItem: i,
+			tailItem: i,
+		}
+		i.pNode = &newNode
+		n.insertAfter(&newNode)
+
+		return nil
+	}
+	// remove the key here
+	i.selfRemove()
+	// move the item to next node
+	i.pNode = n.next
+	n.next.appendStoreItem(i)
+	return nil
 }
