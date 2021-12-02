@@ -104,7 +104,7 @@ func (l *lfuDList) addItem(key, value int) *storeItem {
 		return item
 	}
 	if l.head.freq == 1 {
-		l.head.addItem(item)
+		l.head.appendStoreItem(item)
 		return item
 	}
 	// create new node
@@ -160,14 +160,7 @@ func (n *lfuDNode) selfRemove() {
 
 // Assume:
 // * n != nil
-func (n *lfuDNode) addItem(item *storeItem) *lfuDNode {
-	item.pNode = n
-	n.appendStoreItem(item)
-	return n
-}
-
-// Assume:
-// * n != nil
+// * n.tailItem != nil
 func (n *lfuDNode) appendStoreItem(i *storeItem) {
 	i.pNode = n
 	i.prev = n.tailItem
@@ -234,10 +227,10 @@ func (i *storeItem) touch() *lfuDNode {
 		}
 		return nil
 	}
+	// remove the key here
+	i.selfRemove()
 	// Many items in the node
 	if n.next == nil || n.next.freq != n.freq+1 {
-		// remove the key here
-		i.selfRemove()
 		// create new node
 		newNode := lfuDNode{
 			freq:     n.freq + 1,
