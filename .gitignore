@@ -17,3 +17,5 @@ vendor/
 *.swp
 
 coverage.txt
+
+.vscode/
