@@ -8,9 +8,9 @@ type indexedInterval struct {
 }
 
 func findRightInterval(intervals [][]int) []int {
-	indexIntervals := make([]indexedInterval, len(intervals))
+	indexIntervals := make([]*indexedInterval, len(intervals))
 	for i, e := range intervals {
-		indexIntervals[i] = indexedInterval{
+		indexIntervals[i] = &indexedInterval{
 			index:    i,
 			interval: e,
 		}
@@ -22,11 +22,10 @@ func findRightInterval(intervals [][]int) []int {
 loop_i:
 	for i, e := range indexIntervals {
 		for j := i; j < len(indexIntervals); j++ {
-			if e.interval[1] > indexIntervals[j].interval[0] {
-				continue
+			if e.interval[1] <= indexIntervals[j].interval[0] {
+				result[e.index] = indexIntervals[j].index
+				continue loop_i
 			}
-			result[e.index] = indexIntervals[j].index
-			continue loop_i
 		}
 		result[e.index] = -1
 	}
