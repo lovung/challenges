@@ -21,19 +21,20 @@ func findRightInterval(intervals [][]int) []int {
 	result := make([]int, len(intervals))
 	for i, e := range indexIntervals {
 		val := e.interval[1]
-		nextIndex := binarySearchForIndexedInterval(indexIntervals[i:], func(j int) int {
-			if val < indexIntervals[i+j].interval[0] {
+		idx := i
+		additionalIndex := binarySearchForIndexedInterval(indexIntervals[i:], func(j int) int {
+			if val < indexIntervals[idx+j].interval[0] {
 				return -1
-			} else if val > indexIntervals[i+j].interval[0] {
+			} else if val > indexIntervals[idx+j].interval[0] {
 				return 1
 			}
 			return 0
 		})
-		if nextIndex != -1 {
-			result[e.index] = indexIntervals[i+nextIndex].index
-			continue
+		if additionalIndex != -1 {
+			result[e.index] = indexIntervals[idx+additionalIndex].index
+		} else {
+			result[e.index] = -1
 		}
-		result[e.index] = -1
 	}
 	return result
 }
