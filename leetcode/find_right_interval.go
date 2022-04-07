@@ -19,15 +19,44 @@ func findRightInterval(intervals [][]int) []int {
 		return indexIntervals[i].interval[0] < indexIntervals[j].interval[0]
 	})
 	result := make([]int, len(intervals))
-loop_i:
 	for i, e := range indexIntervals {
-		for j := i; j < len(indexIntervals); j++ {
-			if e.interval[1] <= indexIntervals[j].interval[0] {
-				result[e.index] = indexIntervals[j].index
-				continue loop_i
+		val := e.interval[1]
+		nextIndex := binarySearchForIndexedInterval(indexIntervals[i:], func(j int) int {
+			if val < indexIntervals[i+j].interval[0] {
+				return -1
+			} else if val > indexIntervals[i+j].interval[0] {
+				return 1
 			}
+			return 0
+		})
+		if nextIndex != -1 {
+			result[e.index] = indexIntervals[i+nextIndex].index
+			continue
 		}
 		result[e.index] = -1
 	}
 	return result
+}
+
+// make sure the slice is sorted
+// compFunc returns 0, -1 or 1
+func binarySearchForIndexedInterval(slice []*indexedInterval, compFunc func(i int) int) int {
+	l, r := 0, len(slice)-1
+	pivot := 0
+	for l <= r {
+		pivot = (l + r) / 2
+		cmpVal := compFunc(pivot)
+		switch cmpVal {
+		case -1:
+			r = pivot - 1
+		case 1:
+			l = pivot + 1
+		case 0:
+			return pivot
+		}
+	}
+	if l >= len(slice) {
+		return -1
+	}
+	return l
 }
