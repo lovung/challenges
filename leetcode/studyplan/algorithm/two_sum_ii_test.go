@@ -39,6 +39,14 @@ func Test_twoSum(t *testing.T) {
 			},
 			want: []int{1, 2},
 		},
+		{
+			name: "not-found",
+			args: args{
+				numbers: []int{-1, 0},
+				target:  2,
+			},
+			want: nil,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
