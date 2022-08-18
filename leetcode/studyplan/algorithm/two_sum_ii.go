@@ -1,5 +1,6 @@
 package algorithm
 
+// Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 func twoSum(numbers []int, target int) []int {
 	memoryMap := make(map[int]int)
 	for i := range numbers {
@@ -11,7 +12,7 @@ func twoSum(numbers []int, target int) []int {
 	return nil
 }
 
-func twoSumV2(numbers []int, target int) []int {
+func twoSum2(numbers []int, target int) []int {
 	l, r := 0, len(numbers)-1
 	for l < r {
 		if numbers[l]+numbers[r] == target {

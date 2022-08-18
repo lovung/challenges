@@ -1,5 +1,7 @@
 package algorithm
 
+// Link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+// BigO: O(n)
 func lengthOfLongestSubstring(s string) int {
 	char := make([]int, 256)
 	n := len(s)

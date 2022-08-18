@@ -1,5 +1,7 @@
 package algorithm
 
+// Link: https://leetcode.com/problems/search-insert-position/
+// BigO: O(log n)
 func searchInsert(nums []int, target int) int {
 	l, r := 0, len(nums)
 	for {

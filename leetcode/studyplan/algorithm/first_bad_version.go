@@ -4,6 +4,8 @@ var (
 	isBadVersion = func(k int) bool { return k >= 4 }
 )
 
+// Link: https://leetcode.com/problems/first-bad-version/
+// BigO: O(log n)
 func firstBadVersion(n int) int {
 	l, r := 0, n
 	for {

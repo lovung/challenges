@@ -1,5 +1,7 @@
 package algorithm
 
+// Link: https://leetcode.com/problems/binary-search/
+// BigO: O(log n)
 func search(nums []int, target int) int {
 	l, r := 0, len(nums)
 	mid := (l + r) / 2
