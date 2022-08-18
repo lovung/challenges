@@ -41,6 +41,31 @@ func Test_findTarget(t *testing.T) {
 			},
 			want: true,
 		},
+		{
+			name: "test1",
+			args: args{
+				root: &TreeNode[int]{
+					Val: 5,
+					Left: &TreeNode[int]{
+						Val: 3,
+						Left: &TreeNode[int]{
+							Val: 2,
+						},
+						Right: &TreeNode[int]{
+							Val: 4,
+						},
+					},
+					Right: &TreeNode[int]{
+						Val: 6,
+						Right: &TreeNode[int]{
+							Val: 7,
+						},
+					},
+				},
+				k: 28,
+			},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

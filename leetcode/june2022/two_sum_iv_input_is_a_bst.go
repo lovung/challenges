@@ -54,31 +54,3 @@ func findNode(root *TreeNode[int], k int) *TreeNode[int] {
 	}
 	return nil
 }
-
-// Test cases:
-// [5,3,6,2,4,null,7]
-// 9
-// [5,3,6,2,4,null,7]
-// 28
-// [1]
-// 2
-// [2,1,3,-4,null,null,null,null,0]
-// 2
-// [2,1,3]
-// 4
-
-func findTarget2(root *TreeNode[int], k int) bool {
-	markMap := make(map[int]struct{})
-	return subFindTarget2(root, k, markMap)
-}
-
-func subFindTarget2(root *TreeNode[int], k int, markMap map[int]struct{}) bool {
-	if root == nil {
-		return false
-	}
-	if _, ok := markMap[root.Val-k]; ok {
-		return true
-	}
-	markMap[root.Val] = struct{}{}
-	return subFindTarget2(root.Left, k, markMap) || subFindTarget2(root.Right, k, markMap)
-}
