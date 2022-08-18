@@ -1,10 +1,8 @@
 package june2022
 
-// ListNode in linked list
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import (
+	. "github.com/lovung/challenges/internal/linkedlist"
+)
 
 /**
  * Definition for singly-linked list.
@@ -14,7 +12,7 @@ type ListNode struct {
  * }
  */
 // Link: https://leetcode.com/problems/reverse-linked-list-ii/
-func reverseBetween(head *ListNode, left int, right int) *ListNode {
+func reverseBetween(head *ListNode[int], left int, right int) *ListNode[int] {
 	if head == nil {
 		return nil
 	}
@@ -26,9 +24,9 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	i := 0
 	var (
 		runner           = head
-		prev, next       *ListNode
-		preTail, subHead *ListNode
-		newHead          *ListNode
+		prev, next       *ListNode[int]
+		preTail, subHead *ListNode[int]
+		newHead          *ListNode[int]
 	)
 	for runner != nil {
 		next = runner.Next
@@ -57,10 +55,11 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	return newHead
 }
 
-func reverseList(head *ListNode) *ListNode {
+// Link: https://leetcode.com/problems/reverse-linked-list/
+func reverseList(head *ListNode[int]) *ListNode[int] {
 	var (
 		runner     = head
-		prev, next *ListNode
+		prev, next *ListNode[int]
 	)
 
 	for runner != nil {
@@ -69,28 +68,4 @@ func reverseList(head *ListNode) *ListNode {
 		prev, runner = runner, next
 	}
 	return prev
-}
-
-func swapNodes(head *ListNode, k int) *ListNode {
-	runner := head
-	n := 0
-	for runner != nil {
-		n++
-		runner = runner.Next
-	}
-	runner = head
-	i := 0
-	var first *ListNode
-	for runner != nil {
-		if i == k-1 || i == n-k {
-			if first == nil {
-				first = runner
-			} else {
-				first.Val, runner.Val = runner.Val, first.Val
-			}
-		}
-		i++
-		runner = runner.Next
-	}
-	return head
 }

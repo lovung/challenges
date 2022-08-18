@@ -2,7 +2,7 @@ package june2022
 
 import "math"
 
-// Link: https://leetcode.com/problems/minimum-average-difference/submissions/
+// Link: https://leetcode.com/problems/minimum-average-difference
 func minimumAverageDifference(nums []int) int {
 	n := len(nums)
 	sums := make([]int, n)

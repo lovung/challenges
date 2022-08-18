@@ -20,7 +20,7 @@ func Test_singleNumber2(t *testing.T) {
 }
 
 func Test_singleNumber3(t *testing.T) {
-	assert.Equal(t, []int{3, 5}, singleNumber3([]int{1, 2, 1, 3, 2, 5}))
-	assert.Equal(t, []int{-1, 0}, singleNumber3([]int{-1, 0}))
-	assert.Equal(t, []int{}, singleNumber3([]int{}))
+	assert.ElementsMatch(t, []int{3, 5}, singleNumber3([]int{1, 2, 1, 3, 2, 5}))
+	assert.ElementsMatch(t, []int{-1, 0}, singleNumber3([]int{-1, 0}))
+	assert.ElementsMatch(t, []int{}, singleNumber3([]int{}))
 }

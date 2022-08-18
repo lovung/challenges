@@ -1,5 +1,6 @@
 package june2022
 
+// Link: https://leetcode.com/problems/single-number/
 func singleNumber(nums []int) int {
 	mm := make(map[int]int)
 	for i := range nums {
@@ -15,6 +16,7 @@ func singleNumber(nums []int) int {
 	return 0
 }
 
+// Link: https://leetcode.com/problems/single-number-ii/
 func singleNumber2(nums []int) int {
 	mm := make(map[int]int)
 	for i := range nums {
@@ -33,6 +35,7 @@ func singleNumber2(nums []int) int {
 	return 0
 }
 
+// Link: https://leetcode.com/problems/single-number-iii/
 func singleNumber3(nums []int) []int {
 	mm := make(map[int]int)
 	for i := range nums {

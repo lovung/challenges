@@ -1,25 +1,24 @@
 package june2022
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+import (
+	. "github.com/lovung/challenges/internal/tree"
+)
 
 /**
  * Definition for a binary tree node.
- * type TreeNode struct {
+ * type TreeNode[int] struct {
  *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
+ *     Left *TreeNode[int]
+ *     Right *TreeNode[int]
  * }
  */
-func findTarget(root *TreeNode, k int) bool {
+// Link: https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+func findTarget(root *TreeNode[int], k int) bool {
 	runner := root
 	// implement DFS
-	stack := make([]*TreeNode, 0)
+	stack := make([]*TreeNode[int], 0)
 	stack = append(stack, root)
-	processedNode := make(map[*TreeNode]struct{})
+	processedNode := make(map[*TreeNode[int]]struct{})
 	for len(stack) > 0 {
 		runner = stack[0]
 		stack = stack[1:]
@@ -41,7 +40,7 @@ func findTarget(root *TreeNode, k int) bool {
 	return false
 }
 
-func findNode(root *TreeNode, k int) *TreeNode {
+func findNode(root *TreeNode[int], k int) *TreeNode[int] {
 	runner := root
 	for runner != nil {
 		if runner.Val == k {
@@ -68,12 +67,12 @@ func findNode(root *TreeNode, k int) *TreeNode {
 // [2,1,3]
 // 4
 
-func findTarget2(root *TreeNode, k int) bool {
+func findTarget2(root *TreeNode[int], k int) bool {
 	markMap := make(map[int]struct{})
 	return subFindTarget2(root, k, markMap)
 }
 
-func subFindTarget2(root *TreeNode, k int, markMap map[int]struct{}) bool {
+func subFindTarget2(root *TreeNode[int], k int, markMap map[int]struct{}) bool {
 	if root == nil {
 		return false
 	}
