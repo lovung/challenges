@@ -28,6 +28,30 @@ func Test_checkInclusion(t *testing.T) {
 			},
 			want: false,
 		},
+		{
+			name: "test3",
+			args: args{
+				s1: "ab",
+				s2: "e",
+			},
+			want: false,
+		},
+		{
+			name: "test4",
+			args: args{
+				s1: "ab",
+				s2: "ba",
+			},
+			want: true,
+		},
+		{
+			name: "test4",
+			args: args{
+				s1: "ab",
+				s2: "ab",
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
