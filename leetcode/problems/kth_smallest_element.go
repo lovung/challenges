@@ -1,19 +1,11 @@
 package problems
 
-// import (
-// 	"fmt"
-// )
+import (
+	. "github.com/lovung/challenges/internal/tree"
+)
 
 // Link: https://leetcode.com/submissions/detail/342120127/?from=/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3335/
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-func kthSmallest(root *TreeNode, k int) int {
+func kthSmallest(root *TreeNode[int], k int) int {
 	stack := NewStack(k)
 	worker := root
 	popedStack := false
@@ -25,7 +17,7 @@ func kthSmallest(root *TreeNode, k int) int {
 				break
 			}
 			if worker.Right == nil {
-				worker = (stack.pop()).(*TreeNode)
+				worker = (stack.pop()).(*TreeNode[int])
 				popedStack = true
 			} else {
 				worker = worker.Right
@@ -44,7 +36,7 @@ func kthSmallest(root *TreeNode, k int) int {
 			if k == 0 {
 				break
 			}
-			worker = (stack.pop()).(*TreeNode)
+			worker = (stack.pop()).(*TreeNode[int])
 			popedStack = true
 			continue
 		}

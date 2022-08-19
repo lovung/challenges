@@ -2,12 +2,14 @@ package problems
 
 import (
 	"testing"
+
+	. "github.com/lovung/challenges/internal/tree"
 )
 
 func Test_isCousins(t *testing.T) {
 	nums := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	type args struct {
-		root *TreeNode
+		root *TreeNode[int]
 		x    int
 		y    int
 	}
@@ -64,8 +66,8 @@ func Test_isCousins(t *testing.T) {
 
 // func Test_findNode(t *testing.T) {
 // 	type args struct {
-// 		n     *TreeNode
-// 		p     *TreeNode
+// 		n     *TreeNode[int]
+// 		p     *TreeNode[int]
 // 		level int
 // 		ref   *int
 // 	}
@@ -73,7 +75,7 @@ func Test_isCousins(t *testing.T) {
 // 		name  string
 // 		args  args
 // 		want  int
-// 		want1 *TreeNode
+// 		want1 *TreeNode[int]
 // 	}{
 // 		// TODO: Add test cases.
 // 	}

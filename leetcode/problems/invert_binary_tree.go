@@ -1,11 +1,15 @@
 package problems
 
-func invertTree(root *TreeNode) *TreeNode {
+import (
+	. "github.com/lovung/challenges/internal/tree"
+)
+
+func invertTree(root *TreeNode[int]) *TreeNode[int] {
 	swap(root)
 	return root
 }
 
-func swap(n *TreeNode) {
+func swap(n *TreeNode[int]) {
 	if n == nil {
 		return
 	}

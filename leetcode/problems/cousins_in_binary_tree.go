@@ -1,16 +1,20 @@
 package problems
 
+import (
+	. "github.com/lovung/challenges/internal/tree"
+)
+
 /*
  * Link: https://leetcode.com/problems/cousins-in-binary-tree/
  */
 
-func isCousins(root *TreeNode, x int, y int) bool {
+func isCousins(root *TreeNode[int], x int, y int) bool {
 	level1, p1 := isCousinsFindNode(root, nil, 0, &x)
 	level2, p2 := isCousinsFindNode(root, nil, 0, &y)
 	return (level1 == level2) && (p1 != p2)
 }
 
-func isCousinsFindNode(n, p *TreeNode, level int, ref *int) (int, *TreeNode) {
+func isCousinsFindNode(n, p *TreeNode[int], level int, ref *int) (int, *TreeNode[int]) {
 	if n == nil {
 		return 0, nil
 	}

@@ -3,6 +3,8 @@ package problems
 import (
 	"reflect"
 	"testing"
+
+	. "github.com/lovung/challenges/internal/tree"
 )
 
 func Test_newBinaryTree(t *testing.T) {
@@ -13,7 +15,7 @@ func Test_newBinaryTree(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *TreeNode
+		want *TreeNode[int]
 	}{
 		{
 			name: "test 1",

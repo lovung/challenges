@@ -3,17 +3,19 @@ package problems
 import (
 	"reflect"
 	"testing"
+
+	. "github.com/lovung/challenges/internal/tree"
 )
 
 func Test_invertTree(t *testing.T) {
 	nums := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	type args struct {
-		root *TreeNode
+		root *TreeNode[int]
 	}
 	tests := []struct {
 		name string
 		args args
-		want *TreeNode
+		want *TreeNode[int]
 	}{
 		{
 			name: "test 1",

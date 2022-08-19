@@ -1,12 +1,16 @@
 package problems
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/lovung/challenges/internal/tree"
+)
 
 func Test_kthSmallest(t *testing.T) {
 	nums := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 	nums2 := []int{0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10}
 	type args struct {
-		root *TreeNode
+		root *TreeNode[int]
 		k    int
 	}
 	tests := []struct {

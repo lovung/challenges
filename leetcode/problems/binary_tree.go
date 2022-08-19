@@ -1,31 +1,22 @@
 package problems
 
-// import (
-// 	"fmt"
-// )
+import (
+	. "github.com/lovung/challenges/internal/tree"
+)
 
-// TreeNode in binary tree
-/* Definition for a binary tree node.
- */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func newBinaryTree(nums []*int) *TreeNode {
+func newBinaryTree(nums []*int) *TreeNode[int] {
 	length := len(nums)
 	if length == 0 {
 		return nil
 	}
 	var (
-		stack = make([]*TreeNode, length)
-		head  = &TreeNode{
+		stack = make([]*TreeNode[int], length)
+		head  = &TreeNode[int]{
 			Val:   *nums[0],
 			Left:  nil,
 			Right: nil,
 		}
-		parrent *TreeNode
+		parrent *TreeNode[int]
 	)
 	stack[0] = head
 	// fmt.Printf("head: %v, nums: %v\n", head.Val, *nums[0])
@@ -38,7 +29,7 @@ func newBinaryTree(nums []*int) *TreeNode {
 		if parrent == nil {
 			return nil
 		}
-		newNode := &TreeNode{
+		newNode := &TreeNode[int]{
 			Val:   *nums[i],
 			Left:  nil,
 			Right: nil,
