@@ -55,6 +55,14 @@ func TestMaxValueAndIndex(t *testing.T) {
 			want:  100,
 			want1: 2,
 		},
+		{
+			name: "empty",
+			args: args{
+				s: []int{},
+			},
+			want:  0,
+			want1: -1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
