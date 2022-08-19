@@ -68,6 +68,15 @@ func Test_reverseBetween(t *testing.T) {
 			want: NewLinkedListFromValues([]int{1, 4, 3, 2, 5}),
 		},
 		{
+			name: "normal",
+			args: args{
+				head:  nil,
+				left:  1,
+				right: 1,
+			},
+			want: nil,
+		},
+		{
 			name: "left == right",
 			args: args{
 				head:  NewLinkedListFromValues([]int{1, 2, 3, 4, 5}),
