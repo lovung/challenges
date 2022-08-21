@@ -12,6 +12,14 @@ func Test_maxValue(t *testing.T) {
 		args args
 		want int
 	}{
+		{
+			name: "test0",
+			args: args{
+				events: [][]int{},
+				k:      1,
+			},
+			want: 0,
+		},
 		// {
 		// 	name: "test1",
 		// 	args: args{
@@ -37,7 +45,7 @@ func Test_maxValue(t *testing.T) {
 		// 	want: 9,
 		// },
 		// {
-		// 	name: "test3",
+		// 	name: "test4",
 		// 	args: args{
 		// 		events: [][]int{{1, 1, 4}, {2, 5, 10}, {6, 6, 1}, {1, 2, 7}, {3, 4, 4}, {5, 6, 5}},
 		// 		k:      4,
