@@ -37,7 +37,8 @@ import (
 func nextPermutation(nums []int) {
 	h := heaps.MinHeapWithValue[int]{}
 	heap.Init(&h)
-	for i := len(nums) - 1; i > 0; i-- {
+	i := len(nums) - 1
+	for ;i > 0; i-- {
 		item := heaps.HeapItem[int]{
 			Ref:   nums[i],
 			Value: i,
@@ -50,9 +51,8 @@ func nextPermutation(nums []int) {
 			}
 			gotcha := minValue.(heaps.HeapItem[int])
 			nums[i-1], nums[gotcha.Value.(int)] = nums[gotcha.Value.(int)], nums[i-1]
-			sort.Ints(nums[i:])
-			return
+			break
 		}
 	}
-	sort.Ints(nums)
+	sort.Ints(nums[i:])
 }
