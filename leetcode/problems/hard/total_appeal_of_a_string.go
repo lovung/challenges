@@ -6,7 +6,26 @@ const (
 	atoz = 26
 )
 
-// O(26*n^2) solution
+// Time: O(n)
+// Space: O(1)
+func appealSum2(s string) int64 {
+	sum := 0
+	colSum := 0
+	latestIndex := [atoz]int{}
+	for i := range latestIndex {
+		latestIndex[i] = -1
+	}
+	for i := range s {
+		// passed len - last index
+		colSum += i - latestIndex[s[i]-a]
+		sum += colSum
+		latestIndex[s[i]-a] = i
+	}
+	return int64(sum)
+}
+
+// Time: O(n^2)
+// Space: O(n)
 func appealSum(s string) int64 {
 	l := len(s)
 	sum := l
