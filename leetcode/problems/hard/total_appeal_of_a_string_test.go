@@ -45,6 +45,36 @@ func Test_appealSum(t *testing.T) {
 			if got := appealSum(tt.args.s); got != tt.want {
 				t.Errorf("appealSum() = %v, want %v", got, tt.want)
 			}
+			if got := appealSum2(tt.args.s); got != tt.want {
+				t.Errorf("appealSum2() = %v, want %v", got, tt.want)
+			}
 		})
+	}
+}
+
+func BenchmarkOn2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		appealSum("abbca")
+		appealSum("code")
+		appealSum("vulong")
+		appealSum("vulonggolang")
+	}
+}
+
+func Benchmark_appealSum_On2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		appealSum("abbca")
+		appealSum("code")
+		appealSum("vulong")
+		appealSum("vulonggolang")
+	}
+}
+
+func Benchmark_appealSum_On(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		appealSum2("abbca")
+		appealSum2("code")
+		appealSum2("vulong")
+		appealSum2("vulonggolang")
 	}
 }
