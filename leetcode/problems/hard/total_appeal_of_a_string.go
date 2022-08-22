@@ -1,9 +1,5 @@
 package hard
 
-import (
-	"fmt"
-)
-
 // Link: https://leetcode.com/problems/total-appeal-of-a-string/
 const (
 	a    = 'a'
@@ -39,28 +35,7 @@ func countAppeal(mark []int) int {
 	for i := range mark {
 		if mark[i] > 0 {
 			count++
-		} else if mark[i] < 0 {
-			panic("should not happen")
 		}
 	}
 	return count
-}
-
-func printMark(mark []int) {
-	for i := range mark {
-		if mark[i] > 0 {
-			fmt.Printf(string(rune(i + a)))
-		}
-	}
-	fmt.Println()
-}
-
-func sum2DSlice(mat [][]int) int {
-	sum := 0
-	for i := range mat {
-		for j := range mat[i] {
-			sum += mat[i][j]
-		}
-	}
-	return sum
 }
