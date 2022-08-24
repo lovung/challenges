@@ -2,7 +2,7 @@ package heaps
 
 import "golang.org/x/exp/constraints"
 
-// An MinHeap is a min-heap of ints.
+// MinHeap is a min-heap of ints.
 type MinHeap[T constraints.Ordered] []T
 
 func (h MinHeap[T]) Len() int           { return len(h) }
