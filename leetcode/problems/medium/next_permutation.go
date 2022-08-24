@@ -38,18 +38,18 @@ func nextPermutation(nums []int) {
 	h := heaps.MinHeapWithValue[int]{}
 	heap.Init(&h)
 	i := len(nums) - 1
-	for ;i > 0; i-- {
-		item := heaps.HeapItem[int]{
+	for ; i > 0; i-- {
+		item := &heaps.HeapItem[int]{
 			Ref:   nums[i],
 			Value: i,
 		}
 		heap.Push(&h, item)
 		if nums[i-1] < nums[i] {
 			minValue := heap.Pop(&h)
-			for minValue != nil && minValue.(heaps.HeapItem[int]).Ref <= nums[i-1] {
+			for minValue != nil && minValue.(*heaps.HeapItem[int]).Ref <= nums[i-1] {
 				minValue = heap.Pop(&h)
 			}
-			gotcha := minValue.(heaps.HeapItem[int])
+			gotcha := minValue.(*heaps.HeapItem[int])
 			nums[i-1], nums[gotcha.Value.(int)] = nums[gotcha.Value.(int)], nums[i-1]
 			break
 		}
