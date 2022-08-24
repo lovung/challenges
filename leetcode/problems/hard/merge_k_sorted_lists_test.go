@@ -23,9 +23,17 @@ func Test_mergeKLists(t *testing.T) {
 					linkedlist.NewLinkedListFromValues([]int{1, 4, 5}),
 					linkedlist.NewLinkedListFromValues([]int{1, 3, 4}),
 					linkedlist.NewLinkedListFromValues([]int{2, 6}),
+					nil,
 				},
 			},
 			want: linkedlist.NewLinkedListFromValues([]int{1, 1, 2, 3, 4, 4, 5, 6}),
+		},
+		{
+			name: "test2",
+			args: args{
+				lists: nil,
+			},
+			want: nil,
 		},
 	}
 	for _, tt := range tests {
