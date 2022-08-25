@@ -3,7 +3,7 @@ package problems
 import (
 	"sort"
 
-	"github.com/lovung/challenges/internal/math"
+	"github.com/lovung/challenges/internal/maths"
 )
 
 func findRadius(houses []int, heaters []int) int {
@@ -14,7 +14,7 @@ func findRadius(houses []int, heaters []int) int {
 	for i := 0; i < len(houses); i++ {
 		nearestDis[i] = binarySearchNearestDistance(houses[i], heaters)
 	}
-	return math.Max(nearestDis...)
+	return maths.Max(nearestDis...)
 }
 
 func binarySearchNearestDistance(location int, sortedPoints []int) int {
@@ -30,7 +30,7 @@ func binarySearchNearestDistance(location int, sortedPoints []int) int {
 				return -dis
 			}
 			if location > sortedPoints[mid-1] {
-				return math.Min(location-sortedPoints[mid-1], -dis)
+				return maths.Min(location-sortedPoints[mid-1], -dis)
 			}
 			r = mid - 1
 		case dis > 0:
@@ -38,7 +38,7 @@ func binarySearchNearestDistance(location int, sortedPoints []int) int {
 				return dis
 			}
 			if location < sortedPoints[mid+1] {
-				return math.Min(sortedPoints[mid+1]-location, dis)
+				return maths.Min(sortedPoints[mid+1]-location, dis)
 			}
 			l = mid + 1
 		}
