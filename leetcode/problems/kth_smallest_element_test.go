@@ -3,7 +3,7 @@ package problems
 import (
 	"testing"
 
-	. "github.com/lovung/challenges/internal/tree"
+	. "github.com/lovung/ds/trees"
 )
 
 func Test_kthSmallest(t *testing.T) {

@@ -3,7 +3,7 @@ package medium
 import (
 	"strings"
 
-	"github.com/lovung/challenges/internal/stack"
+	"github.com/lovung/ds/stack"
 )
 
 const sep = "/"

@@ -3,15 +3,15 @@ package easy
 import (
 	"testing"
 
-	"github.com/lovung/challenges/internal/pointer"
-	"github.com/lovung/challenges/internal/tree"
+	"github.com/lovung/ds/pointer"
+	"github.com/lovung/ds/trees"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_isSameTree(t *testing.T) {
 	type args struct {
-		p *tree.TreeNode[int]
-		q *tree.TreeNode[int]
+		p *trees.TreeNode[int]
+		q *trees.TreeNode[int]
 	}
 	tests := []struct {
 		name string
@@ -30,47 +30,47 @@ func Test_isSameTree(t *testing.T) {
 			name: "empty-1",
 			args: args{
 				p: nil,
-				q: tree.Slice2TreeNode([]*int{pointer.Of(1)}),
+				q: trees.Slice2TreeNode([]*int{pointer.Of(1)}),
 			},
 			want: false,
 		},
 		{
 			name: "diff-1",
 			args: args{
-				p: tree.Slice2TreeNode([]*int{pointer.Of(1)}),
-				q: tree.Slice2TreeNode([]*int{pointer.Of(2)}),
+				p: trees.Slice2TreeNode([]*int{pointer.Of(1)}),
+				q: trees.Slice2TreeNode([]*int{pointer.Of(2)}),
 			},
 			want: false,
 		},
 		{
 			name: "normal-equal",
 			args: args{
-				p: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(3)}),
-				q: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(3)}),
+				p: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(3)}),
+				q: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(3)}),
 			},
 			want: true,
 		},
 		{
 			name: "nil-left-and-nil-right",
 			args: args{
-				p: tree.Slice2TreeNode([]*int{pointer.Of(1), nil, pointer.Of(3)}),
-				q: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(3)}),
+				p: trees.Slice2TreeNode([]*int{pointer.Of(1), nil, pointer.Of(3)}),
+				q: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(3)}),
 			},
 			want: false,
 		},
 		{
 			name: "1-nil-right",
 			args: args{
-				p: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(3)}),
-				q: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2)}),
+				p: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(3)}),
+				q: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2)}),
 			},
 			want: false,
 		},
 		{
 			name: "diff-value",
 			args: args{
-				p: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(1), pointer.Of(2)}),
-				q: tree.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(1)}),
+				p: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(1), pointer.Of(2)}),
+				q: trees.Slice2TreeNode([]*int{pointer.Of(1), pointer.Of(2), pointer.Of(1)}),
 			},
 			want: false,
 		},

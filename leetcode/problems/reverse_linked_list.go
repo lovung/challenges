@@ -1,7 +1,7 @@
 package problems
 
 import (
-	. "github.com/lovung/challenges/internal/linkedlist"
+	"github.com/lovung/ds/lists"
 )
 
 /**
@@ -12,7 +12,7 @@ import (
  * }
  */
 // Link: https://leetcode.com/problems/reverse-linked-list-ii/
-func reverseBetween(head *ListNode[int], left int, right int) *ListNode[int] {
+func reverseBetween(head *lists.ListNode[int], left int, right int) *lists.ListNode[int] {
 	if head == nil {
 		return nil
 	}
@@ -24,9 +24,9 @@ func reverseBetween(head *ListNode[int], left int, right int) *ListNode[int] {
 	i := 0
 	var (
 		runner           = head
-		prev, next       *ListNode[int]
-		preTail, subHead *ListNode[int]
-		newHead          *ListNode[int]
+		prev, next       *lists.ListNode[int]
+		preTail, subHead *lists.ListNode[int]
+		newHead          *lists.ListNode[int]
 	)
 	for runner != nil {
 		next = runner.Next
@@ -56,10 +56,10 @@ func reverseBetween(head *ListNode[int], left int, right int) *ListNode[int] {
 }
 
 // Link: https://leetcode.com/problems/reverse-linked-list/
-func reverseList(head *ListNode[int]) *ListNode[int] {
+func reverseList(head *lists.ListNode[int]) *lists.ListNode[int] {
 	var (
 		runner     = head
-		prev, next *ListNode[int]
+		prev, next *lists.ListNode[int]
 	)
 
 	for runner != nil {

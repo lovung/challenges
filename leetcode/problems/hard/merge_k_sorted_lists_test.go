@@ -3,30 +3,30 @@ package hard
 import (
 	"testing"
 
-	"github.com/lovung/challenges/internal/linkedlist"
+	. "github.com/lovung/ds/lists"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_mergeKLists(t *testing.T) {
 	type args struct {
-		lists []*linkedlist.ListNode[int]
+		lists []*ListNode[int]
 	}
 	tests := []struct {
 		name string
 		args args
-		want *linkedlist.ListNode[int]
+		want *ListNode[int]
 	}{
 		{
 			name: "test1",
 			args: args{
-				lists: []*linkedlist.ListNode[int]{
-					linkedlist.NewLinkedListFromValues([]int{1, 4, 5}),
-					linkedlist.NewLinkedListFromValues([]int{1, 3, 4}),
-					linkedlist.NewLinkedListFromValues([]int{2, 6}),
+				lists: []*ListNode[int]{
+					NewLinkedListFromValues([]int{1, 4, 5}),
+					NewLinkedListFromValues([]int{1, 3, 4}),
+					NewLinkedListFromValues([]int{2, 6}),
 					nil,
 				},
 			},
-			want: linkedlist.NewLinkedListFromValues([]int{1, 1, 2, 3, 4, 4, 5, 6}),
+			want: NewLinkedListFromValues([]int{1, 1, 2, 3, 4, 4, 5, 6}),
 		},
 		{
 			name: "test2",

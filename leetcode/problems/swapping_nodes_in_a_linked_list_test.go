@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/lovung/challenges/internal/linkedlist"
+	. "github.com/lovung/ds/lists"
 )
 
 func Test_swapNodes(t *testing.T) {

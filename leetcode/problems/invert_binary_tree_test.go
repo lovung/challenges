@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/lovung/challenges/internal/tree"
+	. "github.com/lovung/ds/trees"
 )
 
 func Test_invertTree(t *testing.T) {

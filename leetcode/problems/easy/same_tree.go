@@ -1,8 +1,8 @@
 package easy
 
 import (
-	"github.com/lovung/challenges/internal/queue"
-	"github.com/lovung/challenges/internal/tree"
+	"github.com/lovung/ds/queue"
+	"github.com/lovung/ds/trees"
 )
 
 // Link: https://leetcode.com/problems/same-tree/
@@ -14,9 +14,9 @@ import (
  *     Right *TreeNode
  * }
  */
-func isSameTree(p *tree.TreeNode[int], q *tree.TreeNode[int]) bool {
-	queueP := queue.NewQueue[*tree.TreeNode[int]]()
-	queueQ := queue.NewQueue[*tree.TreeNode[int]]()
+func isSameTree(p *trees.TreeNode[int], q *trees.TreeNode[int]) bool {
+	queueP := queue.NewQueue[*trees.TreeNode[int]]()
+	queueQ := queue.NewQueue[*trees.TreeNode[int]]()
 	queueP.Push(p)
 	queueQ.Push(q)
 	for queueP.Len() > 0 && queueQ.Len() > 0 {
@@ -48,7 +48,7 @@ func isSameTree(p *tree.TreeNode[int], q *tree.TreeNode[int]) bool {
 	return true
 }
 
-func isSameTree2(p *tree.TreeNode[int], q *tree.TreeNode[int]) bool {
+func isSameTree2(p *trees.TreeNode[int], q *trees.TreeNode[int]) bool {
 	if p == nil && q == nil {
 		return true
 	} else if p != nil && q != nil {

@@ -1,7 +1,7 @@
 package problems
 
 import (
-	. "github.com/lovung/challenges/internal/linkedlist"
+	. "github.com/lovung/ds/lists"
 )
 
 // Link: https://leetcode.com/problems/swapping-nodes-in-a-linked-list/

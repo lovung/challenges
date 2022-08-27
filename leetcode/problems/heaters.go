@@ -3,7 +3,7 @@ package problems
 import (
 	"sort"
 
-	"github.com/lovung/challenges/internal/maths"
+	"github.com/lovung/ds/maths"
 )
 
 func findRadius(houses []int, heaters []int) int {

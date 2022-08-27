@@ -1,17 +1,23 @@
 package medium
 
+import "github.com/lovung/ds/graphs"
+
 // Link: https://leetcode.com/problems/surrounded-regions/
 const x, o = 'X', 'O'
 
 func solve(board [][]byte) {
+	if len(board) == 0 || len(board[0]) == 0 {
+		return
+	}
+	m, n := len(board[0]), len(board)
 	type point struct{ x, y int }
-	mark := make([][]bool, len(board))
-	for i := 0; i < len(board); i++ {
-		mark[i] = make([]bool, len(board[i]))
+	mark := make([][]bool, n)
+	for i := 0; i < n; i++ {
+		mark[i] = make([]bool, m)
 	}
 	// q := queue.NewQueue[*point]()
-	for i := 0; i < len(board); i++ {
-		for j := 0; j < len(board[0]); j++ {
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
 			if board[i][j] == x {
 				continue
 			}
@@ -54,4 +60,42 @@ func solveBFSIsSurround(board [][]byte, mark [][]bool, i, j int, needTurn *[][]i
 		solveBFSIsSurround(board, mark, i+1, j, needTurn) &&
 		solveBFSIsSurround(board, mark, i, j-1, needTurn) &&
 		solveBFSIsSurround(board, mark, i, j+1, needTurn)
+}
+
+// Ref: https://github.com/halfrost/LeetCode-Go/blob/master/leetcode/0130.Surrounded-Regions/130.%20Surrounded%20Regions.go
+func solveWithUnionFind(board [][]byte) {
+	if len(board) == 0 {
+		return
+	}
+	m, n := len(board[0]), len(board)
+	uf := graphs.NewUnionFind(n*m + 1)
+
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if (i == 0 || i == n-1 || j == 0 || j == m-1) && board[i][j] == o { //棋盘边缘上的 o 点
+				uf.Union(i*m+j, n*m)
+			} else if board[i][j] == o {
+				if board[i-1][j] == o {
+					uf.Union(i*m+j, (i-1)*m+j)
+				}
+				if board[i+1][j] == o {
+					uf.Union(i*m+j, (i+1)*m+j)
+				}
+				if board[i][j-1] == o {
+					uf.Union(i*m+j, i*m+j-1)
+				}
+				if board[i][j+1] == o {
+					uf.Union(i*m+j, i*m+j+1)
+				}
+
+			}
+		}
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if uf.Find(i*m+j) != uf.Find(n*m) {
+				board[i][j] = x
+			}
+		}
+	}
 }
