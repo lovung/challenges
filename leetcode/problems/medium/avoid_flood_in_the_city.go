@@ -1,7 +1,7 @@
 package medium
 
 import (
-	"github.com/lovung/challenges/internal/queue"
+	"github.com/lovung/ds/queue"
 )
 
 // Link: https://leetcode.com/problems/avoid-flood-in-the-city/

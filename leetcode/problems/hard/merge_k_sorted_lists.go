@@ -3,8 +3,8 @@ package hard
 import (
 	"container/heap"
 
-	"github.com/lovung/challenges/internal/heaps"
-	"github.com/lovung/challenges/internal/linkedlist"
+	"github.com/lovung/ds/heaps"
+	. "github.com/lovung/ds/lists"
 )
 
 // Link: https://leetcode.com/problems/merge-k-sorted-lists/
@@ -15,7 +15,7 @@ import (
  *     Next *ListNode
  * }
  */
-func mergeKLists(lists []*linkedlist.ListNode[int]) *linkedlist.ListNode[int] {
+func mergeKLists(lists []*ListNode[int]) *ListNode[int] {
 	// create a heap with ref is value of linked-list node
 	// the key will be the pointer of the node
 	minHeap := heaps.MinHeapWithValue[int]{}
@@ -33,16 +33,16 @@ func mergeKLists(lists []*linkedlist.ListNode[int]) *linkedlist.ListNode[int] {
 		lists[i] = lists[i].Next
 	}
 	// create new merged sorted linked list
-	var newList *linkedlist.ListNode[int]
-	var runner *linkedlist.ListNode[int]
+	var newList *ListNode[int]
+	var runner *ListNode[int]
 
 	for minHeap.Len() > 0 {
 		smallestItem := heap.Pop(&minHeap).(*heaps.HeapItem[int])
 		if runner == nil {
-			runner = smallestItem.Value.(*linkedlist.ListNode[int])
+			runner = smallestItem.Value.(*ListNode[int])
 			newList = runner
 		} else {
-			runner.Next = smallestItem.Value.(*linkedlist.ListNode[int])
+			runner.Next = smallestItem.Value.(*ListNode[int])
 			runner = runner.Next
 		}
 		if runner.Next != nil {

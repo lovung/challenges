@@ -3,7 +3,7 @@ package medium
 import (
 	"container/heap"
 
-	"github.com/lovung/challenges/internal/heaps"
+	"github.com/lovung/ds/heaps"
 )
 
 // Link: https://leetcode.com/problems/smallest-number-in-infinite-set/

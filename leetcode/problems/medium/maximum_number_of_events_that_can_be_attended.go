@@ -4,7 +4,7 @@ import (
 	"container/heap"
 	"sort"
 
-	"github.com/lovung/challenges/internal/heaps"
+	"github.com/lovung/ds/heaps"
 )
 
 // Link: https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/

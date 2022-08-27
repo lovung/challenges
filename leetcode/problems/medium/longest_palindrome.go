@@ -3,7 +3,7 @@ package medium
 import (
 	"strings"
 
-	"github.com/lovung/challenges/internal/slices"
+	"github.com/lovung/ds/slices"
 )
 
 // Link: https://leetcode.com/problems/longest-palindromic-substring/

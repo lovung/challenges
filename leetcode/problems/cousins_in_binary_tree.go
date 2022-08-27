@@ -1,7 +1,7 @@
 package problems
 
 import (
-	. "github.com/lovung/challenges/internal/tree"
+	. "github.com/lovung/ds/trees"
 )
 
 /*
