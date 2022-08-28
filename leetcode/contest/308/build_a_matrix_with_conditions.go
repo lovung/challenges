@@ -5,11 +5,11 @@ import "github.com/lovung/challenges/internal/queue"
 // Link: https://leetcode.com/problems/build-a-matrix-with-conditions/
 func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
 	rowOrder := toposortKahnAlgo(k, rowConditions)
-	if len(rowOrder) == 0 {
+	if len(rowOrder) != k {
 		return [][]int{}
 	}
 	colOrder := toposortKahnAlgo(k, colConditions)
-	if len(colOrder) == 0 {
+	if len(colOrder) != k {
 		return [][]int{}
 	}
 	result := make([][]int, k)
@@ -60,12 +60,6 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 				// insert m into S
 				s.Push(m)
 			}
-		}
-	}
-	// if graph has edges then return nil that means error
-	for i := range parentCnt {
-		if parentCnt[i] > 0 {
-			return nil
 		}
 	}
 	return res
