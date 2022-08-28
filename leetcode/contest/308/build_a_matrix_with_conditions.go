@@ -33,9 +33,6 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 	childrenList := make([][]int, k+1)
 	for i := range con {
 		parentCnt[con[i][1]]++
-		if childrenList[con[i][0]] == nil {
-			childrenList[con[i][0]] = make([]int, 0, 1)
-		}
 		childrenList[con[i][0]] = append(childrenList[con[i][0]], con[i][1])
 	}
 	res := make([]int, 0, k)
