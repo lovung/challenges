@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+// Link: https://leetcode.com/problems/longest-subsequence-with-limited-sum
 func answerQueries(nums []int, queries []int) []int {
 	sort.Ints(nums)
 	sumArray := make([]int, len(nums)+1)
@@ -44,5 +45,5 @@ func binarySearch(slice []int, compFunc func(i int) int) int {
 			return pivot
 		}
 	}
-	return l-1
+	return l - 1
 }
