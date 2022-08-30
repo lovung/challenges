@@ -30,10 +30,11 @@ func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
 // and: https://leetcode.com/problems/build-a-matrix-with-conditions/discuss/2492865/Khan's-Algo-or-Topological-Sort-or-BFS-or-C%2B%2B-or-Short-and-Easy-to-Understand-Code
 func toposortKahnAlgo(k int, con [][]int) []int {
 	parentCnt := make([]int, k+1)
-	childrenList := make([][]int, k+1)
+	// Adjacency list: https://en.wikipedia.org/wiki/Adjacency_list
+	adjList := make([][]int, k+1)
 	for i := range con {
 		parentCnt[con[i][1]]++
-		childrenList[con[i][0]] = append(childrenList[con[i][0]], con[i][1])
+		adjList[con[i][0]] = append(adjList[con[i][0]], con[i][1])
 	}
 	res := make([]int, 0, k)
 	s := queue.NewQueue[int]()
@@ -49,7 +50,7 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 		// add n to L
 		res = append(res, n)
 		// for each node m with an edge e from n to m do
-		for _, m := range childrenList[n] {
+		for _, m := range adjList[n] {
 			// remove edge e from the graph
 			parentCnt[m]--
 			// f m has no other incoming edges then
