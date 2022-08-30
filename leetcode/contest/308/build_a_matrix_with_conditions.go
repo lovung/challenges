@@ -1,6 +1,6 @@
 package contest
 
-import "github.com/lovung/challenges/internal/queue"
+import "github.com/lovung/ds/queue"
 
 // Link: https://leetcode.com/problems/build-a-matrix-with-conditions/
 func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
