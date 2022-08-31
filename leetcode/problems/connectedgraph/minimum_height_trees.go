@@ -1,4 +1,4 @@
-package undriectedgraph
+package connectedgraph
 
 import (
 	"container/heap"
