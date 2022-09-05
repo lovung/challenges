@@ -34,10 +34,9 @@ func verticalTraversal(root *trees.TreeNode[int]) [][]int {
 		if levels[i].hl > levels[j].hl {
 			return false
 		}
-		// don't need to check because we travel top->down
-		// if levels[i].vl < levels[j].vl {
-		// 	return true
-		// }
+		if levels[i].vl < levels[j].vl {
+			return true
+		}
 		if levels[i].vl > levels[j].vl {
 			return false
 		}
