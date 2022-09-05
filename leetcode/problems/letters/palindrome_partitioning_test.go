@@ -15,15 +15,15 @@ func Test_partition(t *testing.T) {
 		args args
 		want [][]string
 	}{
-		// {
-		// 	args: args{
-		// 		s: "aab",
-		// 	},
-		// 	want: [][]string{
-		// 		{"a", "a", "b"},
-		// 		{"aa", "b"},
-		// 	},
-		// },
+		{
+			args: args{
+				s: "aab",
+			},
+			want: [][]string{
+				{"a", "a", "b"},
+				{"aa", "b"},
+			},
+		},
 		{
 			args: args{
 				s: "abaeeada",
