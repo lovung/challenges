@@ -13,13 +13,37 @@ func Test_minimumOperations(t *testing.T) {
 	}{
 		{
 			args: args{
+				nums: []int{1, 2, 1, 2},
+			},
+			want: 0,
+		},
+		{
+			args: args{
+				nums: []int{1, 2, 1, 2, 3, 4},
+			},
+			want: 2,
+		},
+		{
+			args: args{
 				nums: []int{3, 1, 3, 2, 4, 3},
 			},
 			want: 3,
 		},
 		{
 			args: args{
+				nums: []int{1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3},
+			},
+			want: 7,
+		},
+		{
+			args: args{
 				nums: []int{1, 2, 2, 2, 2},
+			},
+			want: 2,
+		},
+		{
+			args: args{
+				nums: []int{1, 1, 1, 1, 1, 3},
 			},
 			want: 2,
 		},
