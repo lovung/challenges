@@ -11,3 +11,16 @@ func maxProfitII(prices []int) int {
 	}
 	return cash
 }
+
+func maxProfitII2(prices []int) int {
+	// cash, hold := 0, -prices[0]
+	max := 0
+	for i := 1; i < len(prices); i++ {
+		// cash = maths.Max(cash, hold+prices[i])
+		// hold = maths.Max(hold, cash-prices[i])
+		if prices[i] > prices[i-1] {
+			max += prices[i] - prices[i-1]
+		}
+	}
+	return max
+}
