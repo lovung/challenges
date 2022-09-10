@@ -35,6 +35,9 @@ func Test_maxProfitII(t *testing.T) {
 			if got := maxProfitII(tt.args.prices); got != tt.want {
 				t.Errorf("maxProfitII() = %v, want %v", got, tt.want)
 			}
+			if got := maxProfitII2(tt.args.prices); got != tt.want {
+				t.Errorf("maxProfitII2() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
