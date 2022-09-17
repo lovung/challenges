@@ -22,6 +22,12 @@ func Test_palindromePairs(t *testing.T) {
 		},
 		{
 			args: args{
+				words: []string{"abcd", "dcba", "lls", "s", "sssll", "abcd"},
+			},
+			want: [][]int{{0, 1}, {1, 0}, {1, 5}, {2, 4}, {3, 2}, {5, 1}},
+		},
+		{
+			args: args{
 				words: []string{"bat", "tab", "cat"},
 			},
 			want: [][]int{{0, 1}, {1, 0}},
