@@ -1,4 +1,4 @@
-package interview
+package sep2022
 
 import "testing"
 
@@ -64,11 +64,11 @@ func Benchmark_findTotalImbalance2(b *testing.B) {
 
 // goos: darwin
 // goarch: amd64
-// pkg: github.com/lovung/challenges/interview/amz
+// pkg: github.com/lovung/challenges/interview/sep2022
 // cpu: Intel(R) Core(TM) i7-4980HQ CPU @ 2.80GHz
-// Benchmark_findTotalImbalance-8   	 6319729	       345.7 ns/op	      64 B/op	       9 allocs/op
+// Benchmark_findTotalImbalance-8   	 4728900	       274.6 ns/op	      72 B/op	       9 allocs/op
 // PASS
-// ok  	github.com/lovung/challenges/interview/amz	2.476s
+// ok  	github.com/lovung/challenges/interview/sep2022	2.752s
 func Benchmark_findTotalImbalance(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		findTotalImbalance([]int32{5, 1, 3, 4, 2})

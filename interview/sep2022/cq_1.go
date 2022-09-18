@@ -1,4 +1,4 @@
-package interview
+package sep2022
 
 func getMinMoves(plates []int32) int32 {
 	lightestPlate, heaviestPlate := plates[0], plates[0]
