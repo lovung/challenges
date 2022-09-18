@@ -25,10 +25,7 @@ func trap(height []int) int {
 
 	trappedWater := 0
 	for i := range height {
-		minWall := maths.Min(highestLtoR[i], highestRtoL[i])
-		if minWall > height[i] {
-			trappedWater += minWall - height[i]
-		}
+		trappedWater += maths.Min(highestLtoR[i], highestRtoL[i]) - height[i]
 	}
 	return trappedWater
 }
