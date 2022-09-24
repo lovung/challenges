@@ -2,14 +2,7 @@ package medium
 
 import "github.com/lovung/ds/trees"
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+// Link: https://leetcode.com/problems/path-sum-ii/
 func pathSum(root *trees.TreeNode[int], targetSum int) [][]int {
 	res := make([][]int, 0)
 	passedValues := make([]int, 0)
