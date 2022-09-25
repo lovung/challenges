@@ -21,6 +21,13 @@ func Test_coinChange(t *testing.T) {
 		},
 		{
 			args: args{
+				coins:  []int{2, 5},
+				amount: 3,
+			},
+			want: -1,
+		},
+		{
+			args: args{
 				coins:  []int{2, 5, 10, 1},
 				amount: 27,
 			},
@@ -52,6 +59,13 @@ func Test_coinChange2(t *testing.T) {
 				amount: 11,
 			},
 			want: 3,
+		},
+		{
+			args: args{
+				coins:  []int{2, 5},
+				amount: 3,
+			},
+			want: -1,
 		},
 		{
 			args: args{
