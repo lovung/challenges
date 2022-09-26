@@ -47,6 +47,9 @@ func Test_largestRectangleArea(t *testing.T) {
 			if got := largestRectangleArea(tt.args.heights); got != tt.want {
 				t.Errorf("largestRectangleArea() = %v, want %v", got, tt.want)
 			}
+			if got := largestRectangleArea1(tt.args.heights); got != tt.want {
+				t.Errorf("largestRectangleArea1() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
@@ -110,8 +113,9 @@ func Test_largestRectangleArea2(t *testing.T) {
 // goarch: amd64
 // pkg: github.com/lovung/challenges/leetcode/grind75
 // cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-// Benchmark_largestRectangleArea-12    	   89968	     12446 ns/op	     768 B/op	       4 allocs/op
-// PASS
+// Benchmark_largestRectangleArea-12
+//
+//	217573	      5979 ns/op	       0 B/op	       0 allocs/op
 func Benchmark_largestRectangleArea(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		largestRectangleArea([]int{2, 1, 5, 6, 2, 3})
@@ -128,8 +132,28 @@ func Benchmark_largestRectangleArea(b *testing.B) {
 // goarch: amd64
 // pkg: github.com/lovung/challenges/leetcode/grind75
 // cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-// Benchmark_largestRectangleArea2-12    	  260311	      5167 ns/op	    1472 B/op	       4 allocs/op
-// PASS
+// Benchmark_largestRectangleArea1-12
+//
+//	96876	     11828 ns/op	     768 B/op	       4 allocs/op
+func Benchmark_largestRectangleArea1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		largestRectangleArea1([]int{2, 1, 5, 6, 2, 3})
+		largestRectangleArea1([]int{
+			1, 1, 1, 2, 1, 5, 6, 2, 3,
+			2, 1, 5, 6, 2, 3, 8, 4, 2,
+			6, 7, 8, 3, 2, 0, 4, 6, 3,
+			1, 1, 1, 1, 1, 1, 9, 1, 8,
+		})
+	}
+}
+
+// goos: darwin
+// goarch: amd64
+// pkg: github.com/lovung/challenges/leetcode/grind75
+// cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+// Benchmark_largestRectangleArea2-12
+//
+//	617722	      1867 ns/op	    1472 B/op	       4 allocs/op
 func Benchmark_largestRectangleArea2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		largestRectangleArea2([]int{2, 1, 5, 6, 2, 3})
