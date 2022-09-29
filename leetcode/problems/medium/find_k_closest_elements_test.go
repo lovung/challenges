@@ -78,6 +78,9 @@ func Test_findClosestElements(t *testing.T) {
 			if got := findClosestElements(tt.args.arr, tt.args.k, tt.args.x); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("findClosestElements() = %v, want %v", got, tt.want)
 			}
+			if got := findClosestElements2(tt.args.arr, tt.args.k, tt.args.x); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("findClosestElements2() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }
