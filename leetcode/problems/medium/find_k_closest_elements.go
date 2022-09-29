@@ -68,8 +68,5 @@ func binarySearch(arr []int, x int) (int, int) {
 			r = mid - 1
 		}
 	}
-	if l == r {
-		return l - 1, r
-	}
 	return r, l
 }
