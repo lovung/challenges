@@ -1,7 +1,10 @@
 package medium
 
 import (
+	"container/heap"
 	"sort"
+
+	"github.com/lovung/ds/heaps"
 )
 
 // Link: https://leetcode.com/problems/find-k-closest-elements/
@@ -69,4 +72,29 @@ func binarySearch(arr []int, x int) (int, int) {
 		}
 	}
 	return r, l
+}
+
+func findClosestElements2(arr []int, k int, x int) []int {
+	minHeap := heaps.MinHeapWithValue[int]{}
+	heap.Init(&minHeap)
+	for i := range arr {
+		heap.Push(&minHeap, &heaps.HeapItem[int]{
+			Ref:   calculateOrderValue(arr[i] - x),
+			Value: arr[i],
+		})
+	}
+	res := make([]int, 0, k)
+	for i := 0; i < k; i++ {
+		item := heap.Pop(&minHeap).(*heaps.HeapItem[int])
+		res = append(res, item.Value.(int))
+	}
+	sort.Ints(res)
+	return res
+}
+
+func calculateOrderValue(x int) int {
+	if x < 0 {
+		return -2 * x
+	}
+	return 2*x + 1
 }
