@@ -9,6 +9,9 @@ var dir = [][]int{
 
 // Link: https://leetcode.com/problems/number-of-islands/submissions/
 func numIslands(grid [][]byte) int {
+	// DFS solution:
+	// 	Time: O(n + m * n)
+	// 	Space: > O(m * n)
 	m := len(grid)
 	if m == 0 {
 		return 0
