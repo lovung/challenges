@@ -1,4 +1,4 @@
-package medium
+package matrix
 
 var dir = [][]int{
 	{-1, 0},
