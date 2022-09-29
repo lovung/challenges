@@ -1,7 +1,6 @@
 package problems
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -18,7 +17,6 @@ func reconstructQueue(people [][]int) [][]int {
 		return people[i][0] < people[j][0]
 	})
 	for _, e := range people {
-		fmt.Println(e)
 		k := e[1]
 		for j := 0; j < n; j++ {
 			if out[j][0] != -1 && out[j][0] < e[0] {
