@@ -3,7 +3,7 @@ module github.com/lovung/challenges
 go 1.19
 
 require (
-	github.com/lovung/ds v0.2.2
+	github.com/lovung/ds v0.2.3
 	github.com/stretchr/testify v1.8.0
 )
 
