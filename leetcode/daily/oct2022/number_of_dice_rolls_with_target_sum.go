@@ -29,3 +29,26 @@ func numRollsToTarget(n int, k int, target int) int {
 	}
 	return dp[n-1][target-1]
 }
+
+func numRollsToTarget2(n int, k int, target int) int {
+	dp := make([]int, target)
+	// j+1 is the current target
+	for j := 0; j < maths.Min(k, target); j++ {
+		dp[j] = 1
+	}
+	for i := 1; i < n; i++ {
+		dp2 := make([]int, target)
+		for j := i; j < target; j++ {
+			dp2[j] = dp2[j-1] + dp[j-1]
+			if j > k {
+				dp2[j] -= dp[j-k-1]
+			}
+			dp2[j] %= mod
+			if dp2[j] < 0 {
+				dp2[j] += mod
+			}
+		}
+		copy(dp, dp2)
+	}
+	return dp[target-1]
+}
