@@ -60,5 +60,10 @@ func Test_numRollsToTarget(t *testing.T) {
 				t.Errorf("numRollsToTarget() = %v, want %v", got, tt.want)
 			}
 		})
+		t.Run(tt.name, func(t *testing.T) {
+			if got := numRollsToTarget2(tt.args.n, tt.args.k, tt.args.target); got != tt.want {
+				t.Errorf("numRollsToTarget2() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
