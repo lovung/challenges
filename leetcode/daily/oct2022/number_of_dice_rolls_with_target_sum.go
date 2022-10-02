@@ -21,10 +21,7 @@ func numRollsToTarget(n int, k int, target int) int {
 			if j > k {
 				dp[i][j] -= dp[i-1][j-k-1]
 			}
-			dp[i][j] %= mod
-			if dp[i][j] < 0 {
-				dp[i][j] += mod
-			}
+			dp[i][j] = (dp[i][j] + mod) % mod
 		}
 	}
 	return dp[n-1][target-1]
@@ -43,10 +40,7 @@ func numRollsToTarget2(n int, k int, target int) int {
 			if j > k {
 				dp2[j] -= dp[j-k-1]
 			}
-			dp2[j] %= mod
-			if dp2[j] < 0 {
-				dp2[j] += mod
-			}
+			dp2[j] = (dp2[j] + mod) % mod
 		}
 		copy(dp, dp2)
 	}
