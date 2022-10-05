@@ -83,6 +83,12 @@ func Test_minimumOperations(t *testing.T) {
 			},
 			want: 2,
 		},
+		{
+			args: args{
+				nums: []int{1, 3, 1, 3, 1, 3, 2, 1},
+			},
+			want: 2,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
