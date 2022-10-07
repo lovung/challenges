@@ -6,7 +6,7 @@ type Trie struct {
 	children [26]*Trie
 }
 
-func Constructor() Trie {
+func NewTrie() Trie {
 	return Trie{}
 }
 
