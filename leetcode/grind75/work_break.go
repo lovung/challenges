@@ -13,7 +13,7 @@ func wordBreak(s string, wordDict []string) bool {
 	}
 	q := queue.NewQueue[int]()
 	q.Push(0)
-	processedIndex := make(map[int]bool)
+	processedIndex := make([]bool, len(s))
 	processedIndex[0] = true
 	for q.Len() > 0 {
 		start := q.Pop()
