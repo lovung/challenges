@@ -38,17 +38,12 @@ func transform1CharWithCheck(
 			newWord := []byte(word)
 			newWord[i] = a + j
 			strNewWord := string(newWord)
-			if strNewWord == word {
-				continue
-			}
-			if wordMap[strNewWord] {
-				if !visited[strNewWord] {
-					q.Push(&wordQueueItem{
-						word:    strNewWord,
-						stepCnt: stepCnt + 1,
-					})
-					visited[strNewWord] = true
-				}
+			if strNewWord != word && wordMap[strNewWord] && !visited[strNewWord] {
+				q.Push(&wordQueueItem{
+					word:    strNewWord,
+					stepCnt: stepCnt + 1,
+				})
+				visited[strNewWord] = true
 			}
 		}
 	}
