@@ -14,6 +14,13 @@ func Test_threeSumClosest(t *testing.T) {
 	}{
 		{
 			args: args{
+				nums:   []int{-1, 2, 1, -4, 5, -2, 4},
+				target: 1,
+			},
+			want: 1,
+		},
+		{
+			args: args{
 				nums:   []int{-1, 2, 1, -4},
 				target: 1,
 			},
