@@ -53,6 +53,31 @@ func Test_robotWithString(t *testing.T) {
 			if got := robotWithString(tt.args.s); got != tt.want {
 				t.Errorf("robotWithString() = %v, want %v", got, tt.want)
 			}
+			if got := robotWithString2(tt.args.s); got != tt.want {
+				t.Errorf("robotWithString2() = %v, want %v", got, tt.want)
+			}
 		})
+	}
+}
+
+// goos: darwin
+// goarch: amd64
+// pkg: github.com/lovung/challenges/leetcode/contest/314
+// cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+// Benchmark_robotWithString-12    	   17044	     78564 ns/op	  252145 B/op	    1413 allocs/op
+func Benchmark_robotWithString(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		robotWithString("mwwpdiaczqyppjvpdqqjwrgkbtalhdwcdmmcalvgotncnfwfediflmgjrkztqfzwhbsqluyyoredzjactccazovpfotmidlcrkvfhbwtyxyhjclplrqyqwehqwqeoaaaenntiejinjnbsitfzbdrcwqkwbotwlfzvkpdphokemtowgwcbxavmluolspgoyymfaupymjonafdgacgbecohsqoyfkhgryugskjzohygeexjmheregabjgmnkyyuibvdprpshikpijfgrmiopnlgyxwykcfombzpygnlhxhgycwfihugeflrlkbemecumcdjcyuoyeqgjeefsfammwymbanddabtngsjbzruodcgflgxrsvxjmcdwsqoohriszmjvommoiyagfsuludfnteunvahifzuscrsixwlikuvdqkqimownnmhreycagnmmcxpayxinhmppafvafmjrctceyixzktoablivbsyezwqdjwzvycqmafobcjpsdgwfwtaonpgxcisbcicqedrbjwzlckofdlcfxjpwawjjojijxjrcmfqxttpbvzrepxgdtvdxuydmkxxjuvdxbxslzuimbidnoggackdikblrsjcrepdxkdjniagfrjgfaupjyzkgzfybhfckzmrduqzscfartgbkdmqxitvenoamomxgrviqnrsmnnnlxafahj")
+	}
+}
+
+// goos: darwin
+// goarch: amd64
+// pkg: github.com/lovung/challenges/leetcode/contest/314
+// cpu: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+// Benchmark_robotWithString2-12    	   50287	     25293 ns/op	  109144 B/op	      11 allocs/op
+func Benchmark_robotWithString2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		robotWithString2("mwwpdiaczqyppjvpdqqjwrgkbtalhdwcdmmcalvgotncnfwfediflmgjrkztqfzwhbsqluyyoredzjactccazovpfotmidlcrkvfhbwtyxyhjclplrqyqwehqwqeoaaaenntiejinjnbsitfzbdrcwqkwbotwlfzvkpdphokemtowgwcbxavmluolspgoyymfaupymjonafdgacgbecohsqoyfkhgryugskjzohygeexjmheregabjgmnkyyuibvdprpshikpijfgrmiopnlgyxwykcfombzpygnlhxhgycwfihugeflrlkbemecumcdjcyuoyeqgjeefsfammwymbanddabtngsjbzruodcgflgxrsvxjmcdwsqoohriszmjvommoiyagfsuludfnteunvahifzuscrsixwlikuvdqkqimownnmhreycagnmmcxpayxinhmppafvafmjrctceyixzktoablivbsyezwqdjwzvycqmafobcjpsdgwfwtaonpgxcisbcicqedrbjwzlckofdlcfxjpwawjjojijxjrcmfqxttpbvzrepxgdtvdxuydmkxxjuvdxbxslzuimbidnoggackdikblrsjcrepdxkdjniagfrjgfaupjyzkgzfybhfckzmrduqzscfartgbkdmqxitvenoamomxgrviqnrsmnnnlxafahj")
 	}
 }
