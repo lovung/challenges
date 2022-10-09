@@ -70,3 +70,34 @@ func subFindTarget2(root *TreeNode[int], k int, markMap map[int]struct{}) bool {
 	markMap[root.Val] = struct{}{}
 	return subFindTarget2(root.Left, k, markMap) || subFindTarget2(root.Right, k, markMap)
 }
+
+func findTarget3(root *TreeNode[int], k int) bool {
+	array := make([]int, 0)
+	inorder(root, &array)
+	return findTargetInArray(array, k)
+}
+
+func inorder(node *TreeNode[int], array *[]int) {
+	if node == nil {
+		return
+	}
+	inorder(node.Left, array)
+	*array = append(*array, node.Val)
+	inorder(node.Right, array)
+}
+
+func findTargetInArray(array []int, target int) bool {
+	l, r := 0, len(array)-1
+	for l < r {
+		sum := array[l] + array[r]
+		if sum == target {
+			return true
+		}
+		if sum < target {
+			l++
+		} else {
+			r--
+		}
+	}
+	return false
+}
