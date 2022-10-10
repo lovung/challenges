@@ -13,6 +13,18 @@ func Test_lengthOfLIS(t *testing.T) {
 	}{
 		{
 			args: args{
+				nums: []int{3, 5, 6, 2, 5, 4, 19, 5, 6, 7, 12},
+			},
+			want: 6,
+		},
+		{
+			args: args{
+				nums: []int{10, 9, 2, 5, 6, 3, 7, 101, 18},
+			},
+			want: 5,
+		},
+		{
+			args: args{
 				nums: []int{10, 9, 2, 5, 3, 7, 101, 18},
 			},
 			want: 4,
