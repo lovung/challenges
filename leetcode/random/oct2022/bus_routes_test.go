@@ -16,6 +16,34 @@ func Test_numBusesToDestination(t *testing.T) {
 		{
 			args: args{
 				routes: [][]int{
+					{1, 9, 12, 20, 23, 24, 35, 38},
+					{10, 21, 24, 31, 32, 34, 37, 38, 43},
+					{10, 19, 28, 37},
+					{8},
+					{14, 19},
+					{11, 17, 23, 31, 41, 43, 44},
+					{21, 26, 29, 33},
+					{5, 11, 33, 41},
+					{4, 5, 8, 9, 24, 44}},
+				source: 37,
+				target: 28,
+			},
+			want: 1,
+		},
+		{
+			args: args{
+				routes: [][]int{
+					{2},
+					{2, 8},
+				},
+				source: 8,
+				target: 2,
+			},
+			want: 1,
+		},
+		{
+			args: args{
+				routes: [][]int{
 					{1, 2, 7},
 					{3, 6, 7},
 				},
@@ -77,6 +105,9 @@ func Test_numBusesToDestination(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := numBusesToDestination(tt.args.routes, tt.args.source, tt.args.target); got != tt.want {
 				t.Errorf("numBusesToDestination() = %v, want %v", got, tt.want)
+			}
+			if got := numBusesToDestination2(tt.args.routes, tt.args.source, tt.args.target); got != tt.want {
+				t.Errorf("numBusesToDestination2() = %v, want %v", got, tt.want)
 			}
 		})
 	}
