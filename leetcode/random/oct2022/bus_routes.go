@@ -5,7 +5,7 @@ import "github.com/lovung/ds/queue"
 // Link: https://leetcode.com/problems/bus-routes/
 
 // If only need to return true / false, we can use UnionFind to group all
-// bus stations in the same route together. Check if the `source` and `target` is
+// bus stops in the same route together. Check if the `source` and `target` is
 // in the same group after that.
 
 // Let's go with BFS
@@ -27,8 +27,8 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 	}
 
 	type QueueItem struct {
-		station int
-		level   int
+		stop  int
+		level int
 	}
 	q := queue.NewQueue[*QueueItem]()
 	visited := make(map[int]bool)
@@ -37,16 +37,16 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 
 	for q.Len() > 0 {
 		item := q.Pop()
-		for _, routeIndex := range busIndexMap[item.station] {
-			for _, stationNum := range routes[routeIndex] {
-				if visited[stationNum] {
+		for _, routeIndex := range busIndexMap[item.stop] {
+			for _, stopNum := range routes[routeIndex] {
+				if visited[stopNum] {
 					continue
 				}
-				if stationNum == target {
+				if stopNum == target {
 					return item.level + 1
 				}
-				visited[stationNum] = true
-				q.Push(&QueueItem{stationNum, item.level + 1})
+				visited[stopNum] = true
+				q.Push(&QueueItem{stopNum, item.level + 1})
 			}
 		}
 	}
@@ -54,63 +54,58 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 	return -1
 }
 
+// R is number of routes
+// S is max number of stops in 1 route
 func numBusesToDestination2(routes [][]int, source int, target int) int {
 	if source == target {
 		return 0
 	}
 
-	// Build adjacent map: O(m*n)
-	busIndexMap := make(map[int][]int)
-	for i := range routes {
-		for j := range routes[i] {
-			busIndexMap[routes[i][j]] = append(busIndexMap[routes[i][j]], i)
-		}
-	}
+	// Build adjacent map:
+	// Time: O(R*S), Space: O(R*S)
+	busIndexMap := buildBusIndexMap(routes)
 
+	// Check if no routes go from the source or pass the target
 	if len(busIndexMap[source]) == 0 || len(busIndexMap[target]) == 0 {
 		return -1
 	}
 
-	// routeIndex -> adjecentRouteIndex
-	// If want to remove duplicate,
-	// adjacentRouteMap := make(map[int]map[int]struct{})
-	// But we have visited already to handle it
-	adjacentRouteMap := make(map[int][]int)
-	for _, v := range busIndexMap {
-		if len(v) <= 1 {
-			// skip the alone station
-			continue
-		}
-		for i := range v {
-			// for j := range v {
-			// 	if i == j {
-			// 		continue
-			// 	}
-			// 	if adjacentRouteMap[v[i]] == nil {
-			// 		adjacentRouteMap[v[i]] = make(map[int]struct{})
-			// 	}
-			// 	adjacentRouteMap[v[i]][v[j]] = struct{}
-			// }
-			adjacentRouteMap[v[i]] = append(adjacentRouteMap[v[i]], v[:i]...)
-			adjacentRouteMap[v[i]] = append(adjacentRouteMap[v[i]], v[i+1:]...)
-		}
-	}
+	// Time: O(R*S), Space: O(R)
+	adjacentRouteMap := buildAdjacentRouteMap(busIndexMap)
 
+	// Time: O(R), Space: O(R)
+	routesCanReachTarget := buildRoutesCanReachTarget(busIndexMap, target)
+
+	// Time: O(R), Space: O(R)
+	return bfsNumBusesToDestination(
+		busIndexMap,
+		adjacentRouteMap,
+		source,
+		routesCanReachTarget,
+	)
+}
+
+// Time: O(R), Space: O(R)
+func bfsNumBusesToDestination(
+	busIndexMap map[int][]int,
+	adjacentRouteMap map[int][]int,
+	source int,
+	routesCanReachTarget map[int]bool,
+) int {
 	type QueueItem struct {
 		route int
 		level int
 	}
 	q := queue.NewQueue[*QueueItem]()
 	visited := make(map[int]bool)
+
+	// Small time
 	for _, routeFromSource := range busIndexMap[source] {
 		q.Push(&QueueItem{routeFromSource, 1})
 		visited[routeFromSource] = true
 	}
-	routesCanReachTarget := make(map[int]bool)
-	for _, routeCanReachTarget := range busIndexMap[target] {
-		routesCanReachTarget[routeCanReachTarget] = true
-	}
 
+	// O(R)
 	for q.Len() > 0 {
 		item := q.Pop()
 		if routesCanReachTarget[item.route] {
@@ -126,4 +121,44 @@ func numBusesToDestination2(routes [][]int, source int, target int) int {
 	}
 
 	return -1
+}
+
+// Time: O(R*S), Space: O(R*S)
+func buildBusIndexMap(routes [][]int) map[int][]int {
+	busIndexMap := make(map[int][]int)
+	for i := range routes {
+		for j := range routes[i] {
+			busIndexMap[routes[i][j]] = append(busIndexMap[routes[i][j]], i)
+		}
+	}
+	return busIndexMap
+}
+
+// Time: O(R), Space: O(R)
+func buildRoutesCanReachTarget(busIndexMap map[int][]int, target int) map[int]bool {
+	routesCanReachTarget := make(map[int]bool)
+	for _, routeCanReachTarget := range busIndexMap[target] {
+		routesCanReachTarget[routeCanReachTarget] = true
+	}
+	return routesCanReachTarget
+}
+
+// If want to remove duplicate,
+// adjacentRouteMap := make(map[int]map[int]struct{})
+// But we have visited already to handle it
+// Map from routeIndex to adjecentRouteIndex
+// Time: O(R*S), Space: O(R)
+func buildAdjacentRouteMap(busIndexMap map[int][]int) map[int][]int {
+	adjacentRouteMap := make(map[int][]int)
+	for _, v := range busIndexMap {
+		if len(v) <= 1 {
+			// skip the alone stop
+			continue
+		}
+		for i := range v {
+			adjacentRouteMap[v[i]] = append(adjacentRouteMap[v[i]], v[:i]...)
+			adjacentRouteMap[v[i]] = append(adjacentRouteMap[v[i]], v[i+1:]...)
+		}
+	}
+	return adjacentRouteMap
 }
