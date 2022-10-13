@@ -71,7 +71,7 @@ func numBusesToDestination2(routes [][]int, source int, target int) int {
 	}
 
 	// Time: O(R*S), Space: O(R)
-	adjacentRouteMap := buildAdjacentRouteMap(busIndexMap)
+	adjacentRouteMap := buildAdjacentRouteMap(busIndexMap, len(routes))
 
 	// Time: O(R), Space: O(R)
 	routesCanReachTarget := buildRoutesCanReachTarget(busIndexMap, target)
@@ -88,7 +88,7 @@ func numBusesToDestination2(routes [][]int, source int, target int) int {
 // Time: O(R), Space: O(R)
 func bfsNumBusesToDestination(
 	busIndexMap map[int][]int,
-	adjacentRouteMap map[int][]int,
+	adjacentRouteMap [][]int,
 	source int,
 	routesCanReachTarget map[int]bool,
 ) int {
@@ -148,8 +148,8 @@ func buildRoutesCanReachTarget(busIndexMap map[int][]int, target int) map[int]bo
 // But we have visited already to handle it
 // Map from routeIndex to adjecentRouteIndex
 // Time: O(R*S), Space: O(R)
-func buildAdjacentRouteMap(busIndexMap map[int][]int) map[int][]int {
-	adjacentRouteMap := make(map[int][]int)
+func buildAdjacentRouteMap(busIndexMap map[int][]int, lenRoutes int) [][]int {
+	adjacentRouteMap := make([][]int, lenRoutes)
 	for _, v := range busIndexMap {
 		if len(v) <= 1 {
 			// skip the alone stop
