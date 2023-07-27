@@ -62,4 +62,24 @@ func Test_lowestCommonAncestor(t *testing.T) {
 			Val: 5,
 		}))
 	})
+
+	t.Run("4", func(t *testing.T) {
+		p := trees.Slice2TreeNode([]*int{
+			pointer.Of(2), pointer.Of(0), pointer.Of(4),
+			nil, nil, pointer.Of(3), pointer.Of(5),
+		})
+		q := trees.Slice2TreeNode([]*int{
+			pointer.Of(8), pointer.Of(7), pointer.Of(9),
+		})
+		root := &trees.TreeNode[int]{
+			Val:   6,
+			Left:  p,
+			Right: q,
+		}
+		assert.Equal(t, 4, lowestCommonAncestor(root, &trees.TreeNode[int]{
+			Val: 3,
+		}, &trees.TreeNode[int]{
+			Val: 5,
+		}).Val)
+	})
 }
