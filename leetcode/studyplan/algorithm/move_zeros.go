@@ -13,3 +13,17 @@ func moveZeroes(nums []int) {
 	}
 	copy(nums, newNums)
 }
+
+func moveZeroes2(nums []int) {
+	l, r := 0, 0
+	for ; r < len(nums); r++ {
+		if nums[r] == 0 {
+			continue
+		}
+		nums[l] = nums[r]
+		l++
+	}
+	for ; l < len(nums); l++ {
+		nums[l] = 0
+	}
+}
