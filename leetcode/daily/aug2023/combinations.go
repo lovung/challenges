@@ -16,6 +16,9 @@ func recursiveCombine(remainItems []int, currentItems []int, k int, ret *[][]int
 		*ret = append(*ret, currentItems)
 		return
 	}
+	if len(remainItems)+len(currentItems) < k {
+		return
+	}
 	for i := range remainItems {
 		newRemainItems := make([]int, len(remainItems)-i-1)
 		copy(newRemainItems, remainItems[i+1:])
