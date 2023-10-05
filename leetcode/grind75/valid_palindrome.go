@@ -31,3 +31,40 @@ func isPalindromePure(s string) bool {
 	}
 	return true
 }
+
+func isUpperChar(b byte) bool {
+	return 'A' <= b && 'Z' >= b
+}
+
+func isLowerOrNumChar(b byte) bool {
+	return ('a' <= b && 'z' >= b) ||
+		('0' <= b && '9' >= b)
+}
+
+func isPalindrome2(s string) bool {
+	var lc, rc byte
+	for l, r := 0, len(s)-1; l < r; {
+		lc = s[l]
+		if isUpperChar(s[l]) {
+			lc = lc - 'A' + 'a'
+		}
+		if !isLowerOrNumChar(lc) {
+			l++
+			continue
+		}
+		rc = s[r]
+		if isUpperChar(rc) {
+			rc = rc - 'A' + 'a'
+		}
+		if !isLowerOrNumChar(rc) {
+			r--
+			continue
+		}
+		if lc != rc {
+			return false
+		}
+		l++
+		r--
+	}
+	return true
+}
