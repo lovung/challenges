@@ -1,6 +1,10 @@
 package grind75
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func Test_isPalindrome(t *testing.T) {
 	type args struct {
@@ -23,12 +27,17 @@ func Test_isPalindrome(t *testing.T) {
 			},
 			want: false,
 		},
+		{
+			args: args{
+				s: " ",
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := isPalindrome(tt.args.s); got != tt.want {
-				t.Errorf("isPalindrome() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, isPalindrome(tt.args.s))
+			assert.Equal(t, tt.want, isPalindrome2(tt.args.s))
 		})
 	}
 }
