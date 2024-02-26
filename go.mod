@@ -1,6 +1,6 @@
 module github.com/lovung/challenges
 
-go 1.20
+go 1.22
 
 require (
 	github.com/lovung/ds v0.2.7
