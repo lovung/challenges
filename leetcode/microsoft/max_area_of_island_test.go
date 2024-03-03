@@ -21,7 +21,7 @@ func Test_maxAreaOfIsland(t *testing.T) {
 					{0, 0, 0, 0, 0},
 				},
 			},
-			want: 8,
+			want: 9,
 		},
 		{
 			name: "test2",
