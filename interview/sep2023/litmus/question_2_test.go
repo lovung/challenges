@@ -1,8 +1,10 @@
 package litmus
 
 import (
-	"reflect"
+	"sort"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_findAllHobbyists(t *testing.T) {
@@ -40,9 +42,10 @@ func Test_findAllHobbyists(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findAllHobbyists(tt.args.hobby, tt.args.hobbies); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("findAllHobbyists() = %v, want %v", got, tt.want)
-			}
+			got := findAllHobbyists(tt.args.hobby, tt.args.hobbies)
+			sort.Strings(got)
+			sort.Strings(tt.want)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
