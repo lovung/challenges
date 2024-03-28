@@ -1,7 +1,7 @@
 package mar2024
 
 // https://leetcode.com/problems/find-the-duplicate-number/
-func findDuplicate1(nums []int) int {
+func findDuplicate_hashmap(nums []int) int {
 	exist := make([]bool, len(nums)+1)
 	for i := range nums {
 		if exist[nums[i]] {
@@ -9,19 +9,36 @@ func findDuplicate1(nums []int) int {
 		}
 		exist[nums[i]] = true
 	}
-	return 0
+	return 1
 }
 
-func findDuplicate(nums []int) int {
-	for i := 0; i < len(nums); {
-		n := nums[i]
-		if n == i+1 {
+func findDuplicate_bubbleSort(nums []int) int {
+	n := make([]int, len(nums))
+	copy(n, nums)
+	for i := 0; i < len(n); {
+		if n[i] == i+1 {
 			i++
-		} else if n == nums[n-1] {
-			return n
-		} else {
-			nums[i], nums[n-1] = nums[n-1], n
+			continue
+		}
+		if n[i] == n[n[i]-1] {
+			return n[i]
+		}
+		n[i], n[n[i]-1] = n[n[i]-1], n[i]
+	}
+	return 1
+}
+
+func findDuplicate_tortoiseAndHare(nums []int) int {
+	s, f := nums[0], nums[0]
+	for {
+		s, f = nums[s], nums[nums[f]]
+		if s == f {
+			break
 		}
 	}
-	return 0
+	s = nums[0]
+	for s != f {
+		s, f = nums[s], nums[f]
+	}
+	return f
 }

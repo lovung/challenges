@@ -16,21 +16,21 @@ func NewTimeMap() TimeMap {
 	}
 }
 
-func (this *TimeMap) Set(key string, value string, timestamp int) {
-	this.store[key] = append(this.store[key], &timeItem{
+func (tm *TimeMap) Set(key string, value string, timestamp int) {
+	tm.store[key] = append(tm.store[key], &timeItem{
 		timestamp: timestamp,
 		value:     value,
 	})
 }
 
-func (this *TimeMap) Get(key string, timestamp int) string {
-	if len(this.store[key]) == 0 {
+func (tm *TimeMap) Get(key string, timestamp int) string {
+	if len(tm.store[key]) == 0 {
 		return ""
 	}
-	return this.binarySearch(this.store[key], timestamp)
+	return tm.binarySearch(tm.store[key], timestamp)
 }
 
-func (this *TimeMap) binarySearch(items []*timeItem, timestamp int) string {
+func (tm *TimeMap) binarySearch(items []*timeItem, timestamp int) string {
 	if timestamp < items[0].timestamp {
 		return ""
 	}

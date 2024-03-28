@@ -16,7 +16,7 @@ func avoidFlood(rains []int) []int {
 	fullOfWaterLakes := make(map[int]int)
 	// Queue to save the index of the day which we can dry
 	// to get it when we got the rain into the full of water lake
-	dryDays := queue.NewQueue[int]()
+	dryDays := queue.NewSimpleQueue[int]()
 
 	res := make([]int, len(rains))
 
@@ -30,7 +30,7 @@ func avoidFlood(rains []int) []int {
 				found := false
 				length := dryDays.Len()
 				for j := 0; j < length; j++ {
-					canDryDay := dryDays.Pop()
+					canDryDay, _ := dryDays.DeQueue()
 					// canDryDay should be after the lastRainDay
 					if canDryDay > lastRainDay {
 						found = true
@@ -38,7 +38,7 @@ func avoidFlood(rains []int) []int {
 						delete(fullOfWaterLakes, rains[i])
 						break
 					} else {
-						dryDays.Push(canDryDay)
+						dryDays.EnQueue(canDryDay)
 					}
 				}
 				if !found {
@@ -56,7 +56,7 @@ func avoidFlood(rains []int) []int {
 				}
 				continue
 			}
-			dryDays.Push(i)
+			dryDays.EnQueue(i)
 		}
 	}
 	for i := range res {

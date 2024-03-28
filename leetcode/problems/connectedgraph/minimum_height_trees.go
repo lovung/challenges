@@ -24,30 +24,31 @@ func findMinHeightTrees2(n int, edges [][]int) []int {
 		}
 		neighbors[edges[i][1]][edges[i][0]] = struct{}{}
 	}
-	leaves := queue.NewQueue[int]()
+	leaves := queue.NewSimpleQueue[int]()
 	for i := 0; i < n; i++ {
 		if len(neighbors[i]) == 1 {
-			leaves.Push(i)
+			leaves.EnQueue(i)
 		}
 	}
 
 	remainNode := n
 	for remainNode > 2 {
-		newLeaves := queue.NewQueue[int]()
+		newLeaves := queue.NewSimpleQueue[int]()
 		remainNode -= leaves.Len()
 		for leaves.Len() > 0 {
-			left := leaves.Pop()
+			left, _ := leaves.DeQueue()
 			for k := range neighbors[left] {
 				delete(neighbors[k], left)
 				if len(neighbors[k]) == 1 {
-					newLeaves.Push(k)
+					newLeaves.EnQueue(k)
 				}
 			}
 
 		}
 		leaves = newLeaves
 	}
-	return []int(leaves)
+	items := leaves.(*queue.SimpleQueue[int])
+	return []int(*items)
 }
 
 // Link: https://leetcode.com/problems/minimum-height-trees/

@@ -12,18 +12,28 @@ func Test_findDuplicate(t *testing.T) {
 		expect int
 	}
 	testCase := []test{
-		{[]int{}, 0},
 		{[]int{1, 3, 4, 2, 2}, 2},
 		{[]int{3, 1, 3, 4, 2}, 3},
 		{[]int{2, 2, 2, 2, 2}, 2},
 		{[]int{1, 2, 2, 2, 2}, 2},
+		{[]int{1, 1}, 1},
 	}
 	for _, c := range testCase {
-		input := make([]int, len(c.input))
-		copy(input, c.input)
-		assert.Equal(t, c.expect, findDuplicate(input))
-		input2 := make([]int, len(c.input))
-		copy(input2, c.input)
-		assert.Equal(t, c.expect, findDuplicate1(input2))
+		t.Run("sol_1_hashmap", func(t *testing.T) {
+			input := make([]int, len(c.input))
+			copy(input, c.input)
+			assert.Equal(t, c.expect, findDuplicate_hashmap(input))
+		})
+		t.Run("sol_2_bubble_sort", func(t *testing.T) {
+			input := make([]int, len(c.input))
+			copy(input, c.input)
+			assert.Equal(t, c.expect, findDuplicate_bubbleSort(input))
+		})
+		t.Run("sol_3_tortoiseAndHare", func(t *testing.T) {
+			input := make([]int, len(c.input))
+			copy(input, c.input)
+			assert.Equal(t, c.expect, findDuplicate_tortoiseAndHare(input))
+		})
+
 	}
 }

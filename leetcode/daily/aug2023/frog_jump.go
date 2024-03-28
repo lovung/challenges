@@ -8,11 +8,11 @@ type bfsItem struct {
 }
 
 func canCross(stones []int) bool {
-	bfs := queue.NewQueue[*bfsItem]()
-	bfs.Push(&bfsItem{1, stones[1] - stones[0]})
+	bfs := queue.NewSimpleQueue[*bfsItem]()
+	bfs.EnQueue(&bfsItem{1, stones[1] - stones[0]})
 	cache := make(map[*bfsItem]bool)
 	for bfs.Len() > 0 {
-		item := bfs.Pop()
+		item, _ := bfs.DeQueue()
 		if item.index == len(stones)-1 {
 			return true
 		}
@@ -25,7 +25,7 @@ func canCross(stones []int) bool {
 				break
 			}
 			if canJump(stones, item.index, i, item.lastJump) {
-				bfs.Push(&bfsItem{i, stones[i] - stones[item.index]})
+				bfs.EnQueue(&bfsItem{i, stones[i] - stones[item.index]})
 			}
 		}
 		cache[item] = true
