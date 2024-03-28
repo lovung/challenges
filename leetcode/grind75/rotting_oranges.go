@@ -13,11 +13,11 @@ type point struct{ i, j int }
 func orangesRotting(grid [][]int) int {
 	cacheDistance := make(map[point]int)
 
-	q := queue.NewQueue[pointWithDis]()
+	q := queue.NewSimpleQueue[pointWithDis]()
 	for i := range grid {
 		for j := range grid[i] {
 			if grid[i][j] == 2 {
-				q.Push(pointWithDis{i, j, 0})
+				q.EnQueue(pointWithDis{i, j, 0})
 			} else if grid[i][j] == 1 {
 				cacheDistance[point{i, j}] = -1
 			}
@@ -29,8 +29,8 @@ func orangesRotting(grid [][]int) int {
 	}
 
 	for q.Len() > 0 {
-		orange := q.Pop()
-		floody(grid, cacheDistance, &q, orange.i, orange.j, orange.dis)
+		orange, _ := q.DeQueue()
+		floody(grid, cacheDistance, q, orange.i, orange.j, orange.dis)
 	}
 	maxDis := 0
 	for _, v := range cacheDistance {
@@ -44,7 +44,7 @@ func orangesRotting(grid [][]int) int {
 
 func floody(
 	grid [][]int, cache map[point]int,
-	q *queue.Queue[pointWithDis],
+	q queue.Queue[pointWithDis],
 	i, j int, dis int,
 ) {
 	for _, d := range dir {
@@ -59,7 +59,7 @@ func floody(
 		if grid[_i][_j] == 1 {
 			if cache[point{_i, _j}] == -1 {
 				cache[point{_i, _j}] = dis + 1
-				q.Push(pointWithDis{_i, _j, cache[point{_i, _j}]})
+				q.EnQueue(pointWithDis{_i, _j, cache[point{_i, _j}]})
 			} else {
 				cache[point{_i, _j}] = maths.Min(cache[point{_i, _j}], dis+1)
 			}

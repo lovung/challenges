@@ -14,24 +14,24 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 		wordMap[wordList[i]] = true
 	}
 	visited := make(map[string]bool)
-	q := queue.NewQueue[*wordQueueItem]()
-	q.Push(&wordQueueItem{
+	q := queue.NewSimpleQueue[*wordQueueItem]()
+	q.EnQueue(&wordQueueItem{
 		word:    beginWord,
 		stepCnt: 0,
 	})
 	for q.Len() > 0 {
-		w := q.Pop()
+		w, _ := q.DeQueue()
 		if w.word == endWord {
 			return w.stepCnt + 1
 		}
-		transform1CharWithCheck(w.word, wordMap, w.stepCnt, &q, visited)
+		transform1CharWithCheck(w.word, wordMap, w.stepCnt, q, visited)
 	}
 	return 0
 }
 
 func transform1CharWithCheck(
 	word string, wordMap map[string]bool, stepCnt int,
-	q *queue.Queue[*wordQueueItem], visited map[string]bool,
+	q queue.Queue[*wordQueueItem], visited map[string]bool,
 ) {
 	for i := range word {
 		for j := byte(0); j < 26; j++ {
@@ -39,7 +39,7 @@ func transform1CharWithCheck(
 			newWord[i] = a + j
 			strNewWord := string(newWord)
 			if strNewWord != word && wordMap[strNewWord] && !visited[strNewWord] {
-				q.Push(&wordQueueItem{
+				q.EnQueue(&wordQueueItem{
 					word:    strNewWord,
 					stepCnt: stepCnt + 1,
 				})

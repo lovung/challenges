@@ -10,20 +10,20 @@ func Constructor() MyQueue {
 	}
 }
 
-func (this *MyQueue) Push(x int) {
-	this.data = append(this.data, x)
+func (q *MyQueue) Push(x int) {
+	q.data = append(q.data, x)
 }
 
-func (this *MyQueue) Pop() int {
-	e := this.data[0]
-	this.data = this.data[1:]
+func (q *MyQueue) Pop() int {
+	e := q.data[0]
+	q.data = q.data[1:]
 	return e
 }
 
-func (this *MyQueue) Peek() int {
-	return this.data[0]
+func (q *MyQueue) Peek() int {
+	return q.data[0]
 }
 
-func (this *MyQueue) Empty() bool {
-	return len(this.data) == 0
+func (q *MyQueue) Empty() bool {
+	return len(q.data) == 0
 }

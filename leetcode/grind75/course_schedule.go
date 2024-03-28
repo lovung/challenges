@@ -21,7 +21,7 @@ func dfsCheckCircle(course int, adj [][]int, checkOKCourses, checkingCircle []bo
 	if checkOKCourses[course] {
 		return true
 	}
-	if checkingCircle[course] == true {
+	if checkingCircle[course] {
 		return false
 	}
 	checkingCircle[course] = true

@@ -11,12 +11,12 @@ func wordBreak(s string, wordDict []string) bool {
 	for i := range wordDict {
 		wordDictTrie.Insert(wordDict[i])
 	}
-	q := queue.NewQueue[int]()
-	q.Push(0)
+	q := queue.NewSimpleQueue[int]()
+	q.EnQueue(0)
 	processedIndex := make([]bool, len(s))
 	processedIndex[0] = true
 	for q.Len() > 0 {
-		start := q.Pop()
+		start, _ := q.DeQueue()
 		for end := start + 1; end <= len(s); end++ {
 			if !wordDictTrie.StartsWith(s[start:end]) {
 				break
@@ -25,7 +25,7 @@ func wordBreak(s string, wordDict []string) bool {
 				if end == len(s) {
 					return true
 				} else if !processedIndex[end] {
-					q.Push(end)
+					q.EnQueue(end)
 					processedIndex[end] = true
 				}
 			}

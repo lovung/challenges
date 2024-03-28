@@ -1,8 +1,9 @@
 package connectedgraph
 
 import (
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_findMinHeightTrees(t *testing.T) {
@@ -39,14 +40,12 @@ func Test_findMinHeightTrees(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findMinHeightTrees1(tt.args.n, tt.args.edges); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("findMinHeightTrees1() = %v, want %v", got, tt.want)
-			}
+			got := findMinHeightTrees1(tt.args.n, tt.args.edges)
+			assert.Equal(t, tt.want, got)
 		})
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findMinHeightTrees2(tt.args.n, tt.args.edges); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("findMinHeightTrees2() = %v, want %v", got, tt.want)
-			}
+			got := findMinHeightTrees2(tt.args.n, tt.args.edges)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }

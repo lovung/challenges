@@ -30,13 +30,13 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 		stop  int
 		level int
 	}
-	q := queue.NewQueue[*QueueItem]()
+	q := queue.NewSimpleQueue[*QueueItem]()
 	visited := make(map[int]bool)
-	q.Push(&QueueItem{source, 0})
+	q.EnQueue(&QueueItem{source, 0})
 	visited[source] = true
 
 	for q.Len() > 0 {
-		item := q.Pop()
+		item, _ := q.DeQueue()
 		for _, routeIndex := range busIndexMap[item.stop] {
 			for _, stopNum := range routes[routeIndex] {
 				if visited[stopNum] {
@@ -46,7 +46,7 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 					return item.level + 1
 				}
 				visited[stopNum] = true
-				q.Push(&QueueItem{stopNum, item.level + 1})
+				q.EnQueue(&QueueItem{stopNum, item.level + 1})
 			}
 		}
 	}
@@ -96,18 +96,18 @@ func bfsNumBusesToDestination(
 		route int
 		level int
 	}
-	q := queue.NewQueue[*QueueItem]()
+	q := queue.NewSimpleQueue[*QueueItem]()
 	visited := make(map[int]bool)
 
 	// Small time
 	for _, routeFromSource := range busIndexMap[source] {
-		q.Push(&QueueItem{routeFromSource, 1})
+		q.EnQueue(&QueueItem{routeFromSource, 1})
 		visited[routeFromSource] = true
 	}
 
 	// O(R)
 	for q.Len() > 0 {
-		item := q.Pop()
+		item, _ := q.DeQueue()
 		if routesCanReachTarget[item.route] {
 			return item.level
 		}
@@ -116,7 +116,7 @@ func bfsNumBusesToDestination(
 				continue
 			}
 			visited[routeIndex] = true
-			q.Push(&QueueItem{routeIndex, item.level + 1})
+			q.EnQueue(&QueueItem{routeIndex, item.level + 1})
 		}
 	}
 

@@ -15,12 +15,13 @@ import (
  * }
  */
 func isSameTree(p *trees.TreeNode[int], q *trees.TreeNode[int]) bool {
-	queueP := queue.NewQueue[*trees.TreeNode[int]]()
-	queueQ := queue.NewQueue[*trees.TreeNode[int]]()
-	queueP.Push(p)
-	queueQ.Push(q)
+	queueP := queue.NewSimpleQueue[*trees.TreeNode[int]]()
+	queueQ := queue.NewSimpleQueue[*trees.TreeNode[int]]()
+	queueP.EnQueue(p)
+	queueQ.EnQueue(q)
 	for queueP.Len() > 0 && queueQ.Len() > 0 {
-		rp, rq := queueP.Pop(), queueQ.Pop()
+		rp, _ := queueP.DeQueue()
+		rq, _ := queueQ.DeQueue()
 		if rq == nil && rp == nil {
 			continue
 		}
@@ -37,12 +38,12 @@ func isSameTree(p *trees.TreeNode[int], q *trees.TreeNode[int]) bool {
 			return false
 		}
 		if rq.Left != nil {
-			queueP.Push(rp.Left)
-			queueQ.Push(rq.Left)
+			queueP.EnQueue(rp.Left)
+			queueQ.EnQueue(rq.Left)
 		}
 		if rq.Right != nil {
-			queueP.Push(rp.Right)
-			queueQ.Push(rq.Right)
+			queueP.EnQueue(rp.Right)
+			queueQ.EnQueue(rq.Right)
 		}
 	}
 	return true

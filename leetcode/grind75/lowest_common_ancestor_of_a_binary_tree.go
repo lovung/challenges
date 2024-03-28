@@ -43,3 +43,17 @@ func pathFromRoot(node *trees.TreeNode[int], val int, passedNodes []*trees.TreeN
 	}
 	pathFromRoot(node.Right, val, passedNodes, finalPath)
 }
+
+func lowestCommonAncestor2(root, p, q *trees.TreeNode[int]) *trees.TreeNode[int] {
+	if root == nil || root == p || root == q || root.Val == p.Val || root.Val == q.Val {
+		return root
+	}
+	left := lowestCommonAncestor2(root.Left, p, q)
+	right := lowestCommonAncestor2(root.Right, p, q)
+	if left == nil {
+		return right
+	} else if right == nil {
+		return left
+	}
+	return root
+}

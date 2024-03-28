@@ -12,7 +12,6 @@ func lastSubstring(s string) string {
 	//		->  found the max substring	by check all the list					: O(N)
 	var countIndex [26][]int
 	const a = 'a'
-	const z = 'a'
 
 	// - Find the greatest (by byte) char in the string.
 	for i := range s {

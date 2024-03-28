@@ -12,33 +12,33 @@ func NewTrie() Trie {
 
 const a = 'a'
 
-func (this *Trie) Insert(word string) {
+func (t *Trie) Insert(word string) {
 	if len(word) == 0 {
-		this.end = true
+		t.end = true
 		return
 	}
-	if this.children[word[0]-a] == nil {
-		this.children[word[0]-a] = &Trie{}
+	if t.children[word[0]-a] == nil {
+		t.children[word[0]-a] = &Trie{}
 	}
-	this.children[word[0]-a].Insert(word[1:])
+	t.children[word[0]-a].Insert(word[1:])
 }
 
-func (this *Trie) Search(word string) bool {
+func (t *Trie) Search(word string) bool {
 	if len(word) == 0 {
-		return this.end
+		return t.end
 	}
-	if this.children[word[0]-a] == nil {
+	if t.children[word[0]-a] == nil {
 		return false
 	}
-	return this.children[word[0]-a].Search(word[1:])
+	return t.children[word[0]-a].Search(word[1:])
 }
 
-func (this *Trie) StartsWith(prefix string) bool {
+func (t *Trie) StartsWith(prefix string) bool {
 	if len(prefix) == 0 {
 		return true
 	}
-	if this.children[prefix[0]-a] == nil {
+	if t.children[prefix[0]-a] == nil {
 		return false
 	}
-	return this.children[prefix[0]-a].StartsWith(prefix[1:])
+	return t.children[prefix[0]-a].StartsWith(prefix[1:])
 }

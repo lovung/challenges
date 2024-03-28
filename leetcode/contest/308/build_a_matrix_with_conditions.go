@@ -37,16 +37,16 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 		adjList[con[i][0]] = append(adjList[con[i][0]], con[i][1])
 	}
 	res := make([]int, 0, k)
-	s := queue.NewQueue[int]()
+	s := queue.NewSimpleQueue[int]()
 	for i := 1; i <= k; i++ {
 		if parentCnt[i] == 0 {
-			s.Push(i)
+			s.EnQueue(i)
 		}
 	}
 	// while S is not empty do
 	for s.Len() > 0 {
 		// remove a node n from S
-		n := s.Pop()
+		n, _ := s.DeQueue()
 		// add n to L
 		res = append(res, n)
 		// for each node m with an edge e from n to m do
@@ -56,7 +56,7 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 			// f m has no other incoming edges then
 			if parentCnt[m] == 0 {
 				// insert m into S
-				s.Push(m)
+				s.EnQueue(m)
 			}
 		}
 	}
