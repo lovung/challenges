@@ -29,7 +29,7 @@ func removeZeroSumSublists(head *lists.ListNode[int]) *lists.ListNode[int] {
 		prefixSum = slices.Delete(prefixSum, i+1, j+1)
 		arr = slices.Delete(arr, i, j)
 	}
-	return lists.NewLinkedListFromValues[int](arr)
+	return lists.NewLinkedListFromValues(arr)
 }
 
 func findFirstLastEqual(slice []int) (i, j int, ok bool) {

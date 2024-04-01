@@ -40,5 +40,10 @@ func Test_numSubarrayProductLessThanK(t *testing.T) {
 				t.Errorf("numSubarrayProductLessThanK() = %v, want %v", got, tt.want)
 			}
 		})
+		t.Run(tt.name, func(t *testing.T) {
+			if got := numSubarrayProductLessThanK2(tt.args.nums, tt.args.k); got != tt.want {
+				t.Errorf("numSubarrayProductLessThanK2() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
