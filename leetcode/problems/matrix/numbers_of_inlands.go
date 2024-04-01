@@ -9,25 +9,11 @@ var dir = [][]int{
 
 // Link: https://leetcode.com/problems/number-of-islands/submissions/
 func numIslands(grid [][]byte) int {
-	// DFS solution:
-	// 	Time: O(n + m * n)
-	// 	Space: > O(m * n)
-	m := len(grid)
-	if m == 0 {
-		return 0
-	}
-	n := len(grid[0])
-	if n == 0 {
-		return 0
-	}
-	res, visited := 0, make([][]bool, m)
-	for i := 0; i < m; i++ {
-		visited[i] = make([]bool, n)
-	}
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			if grid[i][j] == '1' && !visited[i][j] {
-				searchIslands(grid, visited, i, j)
+	res := 0
+	for i := range grid {
+		for j := range grid[i] {
+			if grid[i][j] == '1' {
+				searchIslands(grid, i, j)
 				res++
 			}
 		}
@@ -35,13 +21,13 @@ func numIslands(grid [][]byte) int {
 	return res
 }
 
-func searchIslands(grid [][]byte, visited [][]bool, x, y int) {
-	visited[x][y] = true
+func searchIslands(grid [][]byte, x, y int) {
+	grid[x][y] = '2'
 	for i := 0; i < 4; i++ {
 		nx := x + dir[i][0]
 		ny := y + dir[i][1]
-		if isInBoard(grid, nx, ny) && !visited[nx][ny] && grid[nx][ny] == '1' {
-			searchIslands(grid, visited, nx, ny)
+		if isInBoard(grid, nx, ny) && grid[nx][ny] == '1' {
+			searchIslands(grid, nx, ny)
 		}
 	}
 }
