@@ -45,14 +45,10 @@ func partition(arr []PersonCost, l, r int) int {
 	for j := l; j <= r; j++ {
 		if arr[j].diff < pivot {
 			i++
-			tmp := arr[i]
-			arr[i] = arr[j]
-			arr[j] = tmp
+			arr[i], arr[j] = arr[j], arr[i]
 		}
 	}
-	tmp := arr[i+1]
-	arr[i+1] = arr[r]
-	arr[r] = tmp
+	arr[i+1], arr[r] = arr[r], arr[i+1]
 	return i + 1
 }
 

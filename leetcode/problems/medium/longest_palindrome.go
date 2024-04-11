@@ -3,7 +3,7 @@ package medium
 import (
 	"strings"
 
-	"github.com/lovung/ds/slices"
+	"github.com/lovung/ds/slice"
 )
 
 // Link: https://leetcode.com/problems/longest-palindromic-substring/
@@ -39,7 +39,7 @@ func longestPalindrome(s string) string {
 		}
 	}
 
-	maxLen, maxCenter := slices.MaxValueAndIndex(PalindromeRadii)
+	maxLen, maxCenter := slice.MaxValueAndIndex(PalindromeRadii)
 	return removeRune(modifiedStr[maxCenter-maxLen : maxCenter+maxLen])
 }
 
