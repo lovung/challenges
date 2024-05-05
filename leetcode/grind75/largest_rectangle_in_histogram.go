@@ -83,7 +83,7 @@ func largestRectangleArea2(heights []int) int {
 	// Then, I use the index of minHeight to separate them into 2 parts
 	// and find the maxArea can be build by each part
 	// BigO: O(logN * logN)
-	minHeight := segTree.Query(0, 3)
+	minHeight := segTree.Query(0, n)
 	return max(
 		n*minHeight.val,
 		divideToSolve(segTree, heights, 0, minHeight.idx-1),
