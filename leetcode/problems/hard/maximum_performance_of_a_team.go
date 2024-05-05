@@ -5,7 +5,6 @@ import (
 	"sort"
 
 	"github.com/lovung/ds/heaps"
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/maximum-performance-of-a-team/
@@ -38,7 +37,7 @@ func maxPerformance(n int, speed []int, efficiency []int, k int) int {
 			minSpeedInTeam := heap.Pop(&minHeap).(int)
 			totalSpeed -= minSpeedInTeam
 		}
-		maxPerf = maths.Max(maxPerf, totalSpeed*engineers[i].efficiency)
+		maxPerf = max(maxPerf, totalSpeed*engineers[i].efficiency)
 	}
 	return maxPerf % mod
 }

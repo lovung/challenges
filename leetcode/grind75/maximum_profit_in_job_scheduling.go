@@ -2,8 +2,6 @@ package grind75
 
 import (
 	"sort"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/maximum-profit-in-job-scheduling
@@ -34,7 +32,7 @@ func jobScheduling(startTime []int, endTime []int, profit []int) int {
 		if l != -1 {
 			prof += dp[l]
 		}
-		dp[i] = maths.Max(prof, dp[i-1])
+		dp[i] = max(prof, dp[i-1])
 	}
 	return dp[n-1]
 }

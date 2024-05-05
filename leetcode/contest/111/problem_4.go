@@ -1,7 +1,5 @@
 package contest
 
-import "github.com/lovung/ds/maths"
-
 // https://leetcode.com/problems/number-of-beautiful-integers-in-the-range/
 func numberOfBeautifulIntegers(low int, high int, k int) int {
 	cnt := 0
@@ -14,7 +12,7 @@ func numberOfBeautifulIntegers(low int, high int, k int) int {
 			cnt++
 		}
 		if n := getDigitCnt(i); n%2 != 0 {
-			jump := maths.Max((powTen(n)-i)/k, 1)
+			jump := max((powTen(n)-i)/k, 1)
 			i += k * jump
 		} else {
 			i += k

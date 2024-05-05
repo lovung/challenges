@@ -1,7 +1,6 @@
 package grind75
 
 import (
-	"github.com/lovung/ds/maths"
 	"github.com/lovung/ds/trees"
 )
 
@@ -27,18 +26,18 @@ func isValidBSTWithCondition(node *trees.TreeNode[int], max, min *int) bool {
 	)
 }
 
-func fowardMax(max *int, val int) *int {
-	if max == nil {
+func fowardMax(maxPtr *int, val int) *int {
+	if maxPtr == nil {
 		return nil
 	}
-	newMax := maths.Max(*max, val)
+	newMax := max(*maxPtr, val)
 	return &newMax
 }
 
-func fowardMin(min *int, val int) *int {
-	if min == nil {
+func fowardMin(minPtr *int, val int) *int {
+	if minPtr == nil {
 		return nil
 	}
-	newMin := maths.Min(*min, val)
+	newMin := min(*minPtr, val)
 	return &newMin
 }

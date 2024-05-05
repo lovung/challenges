@@ -1,7 +1,5 @@
 package oct2022
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/
 const mod = 1e9 + 7
 
@@ -12,7 +10,7 @@ func numRollsToTarget(n int, k int, target int) int {
 		dp[i] = make([]int, target)
 	}
 	// j+1 is the current target
-	for j := 0; j < maths.Min(k, target); j++ {
+	for j := 0; j < min(k, target); j++ {
 		dp[0][j] = 1
 	}
 	for i := 1; i < n; i++ {
@@ -30,7 +28,7 @@ func numRollsToTarget(n int, k int, target int) int {
 func numRollsToTarget2(n int, k int, target int) int {
 	dp := make([]int, target)
 	// j+1 is the current target
-	for j := 0; j < maths.Min(k, target); j++ {
+	for j := 0; j < min(k, target); j++ {
 		dp[j] = 1
 	}
 	for i := 1; i < n; i++ {

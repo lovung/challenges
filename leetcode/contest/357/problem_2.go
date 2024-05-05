@@ -48,7 +48,7 @@ func canSplitArray2(nums []int, m int) bool {
 				if dp[i][j-1] < m && dp[i+1][j] < m {
 					dp[i][j] = 0
 				} else {
-					dp[i][j] = maths.Max(dp[i][j-1], dp[i+1][j]) + nums[j]
+					dp[i][j] = max(dp[i][j-1], dp[i+1][j]) + nums[j]
 				}
 			}
 		}

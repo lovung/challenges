@@ -3,11 +3,10 @@ package grind75
 import (
 	"math"
 
-	"github.com/lovung/ds/maths"
 	"github.com/lovung/ds/trees"
 )
 
-// Link: https://leetcode.com/problems/largest-rectangle-in-histogram/
+// Link: https://leetcode.com/problems/largest-rectangle-in-histogram/description/
 // BigO: O (N^2)
 func largestRectangleArea(heights []int) int {
 	// max of all subArray ( 					-> O (N^2)
@@ -24,9 +23,9 @@ func largestRectangleArea(heights []int) int {
 		minHeight := h
 		for j := i + 1; j < n; j++ {
 			size := j - i + 1
-			minHeight = maths.Min(minHeight, heights[j])
+			minHeight = min(minHeight, heights[j])
 			area := size * minHeight
-			maxArea = maths.Max(maxArea, area)
+			maxArea = max(maxArea, area)
 		}
 	}
 	return maxArea
@@ -41,10 +40,7 @@ func largestRectangleArea1(heights []int) int {
 	// )										-> O (N^2 * logN)
 	n := len(heights)
 	minFunc := func(a, b int) int {
-		if a < b {
-			return a
-		}
-		return b
+		return min(a, b)
 	}
 	segTree := trees.NewSegmentTreeWithArray(n, minFunc)
 	segTree.SetInitQueryValue(math.MaxInt64)
@@ -61,7 +57,7 @@ func largestRectangleArea1(heights []int) int {
 			size := j - i + 1
 			minHeight := segTree.Query(i, j+1)
 			area := size * minHeight
-			maxArea = maths.Max(maxArea, area)
+			maxArea = max(maxArea, area)
 		}
 	}
 	return maxArea
@@ -87,8 +83,8 @@ func largestRectangleArea2(heights []int) int {
 	// Then, I use the index of minHeight to separate them into 2 parts
 	// and find the maxArea can be build by each part
 	// BigO: O(logN * logN)
-	minHeight := segTree.Query(0, n)
-	return maths.Max(
+	minHeight := segTree.Query(0, 3)
+	return max(
 		n*minHeight.val,
 		divideToSolve(segTree, heights, 0, minHeight.idx-1),
 		divideToSolve(segTree, heights, minHeight.idx+1, n-1),
@@ -111,7 +107,7 @@ func divideToSolve(segTree trees.SegmentTree[item], heights []int, l, r int) int
 	}
 	size := r - l + 1
 	minHeight := segTree.Query(l, r+1)
-	return maths.Max(
+	return max(
 		size*minHeight.val,
 		divideToSolve(segTree, heights, l, minHeight.idx-1),
 		divideToSolve(segTree, heights, minHeight.idx+1, r),

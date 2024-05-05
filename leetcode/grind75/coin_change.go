@@ -3,8 +3,6 @@ package grind75
 import (
 	"math"
 	"sort"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/coin-change/
@@ -49,7 +47,7 @@ func coinChange2(coins []int, amount int) int {
 				break
 			}
 			if dp[i-c] != math.MaxInt64 {
-				dp[i] = maths.Min(dp[i], 1+dp[i-c])
+				dp[i] = min(dp[i], 1+dp[i-c])
 			}
 		}
 	}

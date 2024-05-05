@@ -12,7 +12,7 @@ func longestSubarray(nums []int) int {
 			for j < len(nums) && nums[j] == k {
 				j++
 			}
-			cnt = maths.Max(cnt, j-i)
+			cnt = max(cnt, j-i)
 			i = j - 1
 		}
 	}

@@ -1,7 +1,5 @@
 package oct2022
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/minimum-time-to-make-rope-colorful/
 func minCost(colors string, neededTime []int) int {
 	res := 0
@@ -16,7 +14,7 @@ func minCost(colors string, neededTime []int) int {
 			maxCostSameColor = 0
 		}
 		totalCostSameColor += neededTime[i]
-		maxCostSameColor = maths.Max(maxCostSameColor, neededTime[i])
+		maxCostSameColor = max(maxCostSameColor, neededTime[i])
 		prevColor = colors[i]
 	}
 	res += totalCostSameColor - maxCostSameColor

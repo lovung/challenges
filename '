@@ -1,0 +1,26 @@
+package may2024
+
+// https://leetcode.com/problems/delete-node-in-a-linked-list/description/
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func deleteNode(node *ListNode) {
+	cur, prev := node, (*ListNode)(nil)
+	for cur != nil {
+		if cur.Next != nil {
+			cur.Val = cur.Next.Val
+		} else {
+			prev.Next = nil
+		}
+		prev = cur
+	}
+}

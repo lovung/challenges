@@ -58,6 +58,11 @@ func Test_getMaximumPoints(t *testing.T) {
 				t.Errorf("getMaximumPoints4() = %v, want %v", got, tt.want)
 			}
 		})
+		// t.Run(tt.name, func(t *testing.T) {
+		// 	if got := getMaximumPoints5(tt.args.days, tt.args.k); got != tt.want {
+		// 		t.Errorf("getMaximumPoints4() = %v, want %v", got, tt.want)
+		// 	}
+		// })
 	}
 }
 

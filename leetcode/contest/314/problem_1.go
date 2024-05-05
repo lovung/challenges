@@ -1,7 +1,5 @@
 package contest
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/the-employee-that-worked-on-the-longest-task
 func hardestWorker(n int, logs [][]int) int {
 	resID := n
@@ -13,7 +11,7 @@ func hardestWorker(n int, logs [][]int) int {
 			resID = logs[i][0]
 			longestTaskDur = dur
 		} else if dur == longestTaskDur {
-			resID = maths.Min(resID, logs[i][0])
+			resID = min(resID, logs[i][0])
 		}
 		prevStart = logs[i][1]
 	}

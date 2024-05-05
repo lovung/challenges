@@ -2,8 +2,6 @@ package contest
 
 import (
 	"math"
-
-	"github.com/lovung/ds/maths"
 )
 
 // https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/
@@ -12,7 +10,7 @@ func minAbsoluteDifference(nums []int, x int) int {
 	ret := math.MaxInt
 	for i := 0; i < n-x; i++ {
 		for j := i + x; j < n; j++ {
-			ret = maths.Min(ret, abs(nums[i]-nums[j]))
+			ret = min(ret, abs(nums[i]-nums[j]))
 			if ret == 0 {
 				return ret
 			}

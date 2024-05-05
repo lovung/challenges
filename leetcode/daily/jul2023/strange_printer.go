@@ -1,7 +1,5 @@
 package jul2023
 
-import "github.com/lovung/ds/maths"
-
 // https://leetcode.com/problems/strange-printer
 func strangePrinter(s string) int {
 	n := len(s)
@@ -20,7 +18,7 @@ func strangePrinter(s string) int {
 					j = i
 				}
 				if j != -1 {
-					dp[l][r] = maths.Min(dp[l][r], 1+dp[j][i]+dp[i+1][r])
+					dp[l][r] = min(dp[l][r], 1+dp[j][i]+dp[i+1][r])
 				}
 			}
 

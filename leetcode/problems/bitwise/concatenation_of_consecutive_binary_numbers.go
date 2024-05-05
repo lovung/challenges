@@ -2,8 +2,6 @@ package bitwise
 
 import (
 	"strings"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/
@@ -19,7 +17,7 @@ func concatenatedBinary(n int) int {
 	str := sb.String()
 	k := uint64(1)
 	for checkedLen := 0; checkedLen < len(str); checkedLen += 64 {
-		l, r := maths.Max(0, len(str)-checkedLen-64), len(str)-checkedLen
+		l, r := max(0, len(str)-checkedLen-64), len(str)-checkedLen
 		res += binaryStringToUint64(str[l:r]) * k
 		res %= mod
 		k *= twoMod

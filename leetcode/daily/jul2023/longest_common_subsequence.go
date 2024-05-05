@@ -1,7 +1,5 @@
 package jul2023
 
-import "github.com/lovung/ds/maths"
-
 // https://leetcode.com/problems/longest-common-subsequence
 func longestCommonSubsequence(s1 string, s2 string) int {
 	dp := make([][]int, len(s1))
@@ -25,7 +23,7 @@ func longestCommonSubsequence(s1 string, s2 string) int {
 	for i := 1; i < len(s1); i++ {
 		for j := 1; j < len(s2); j++ {
 			if s1[i] != s2[j] {
-				dp[i][j] = maths.Max(dp[i-1][j], dp[i][j-1])
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 			} else {
 				dp[i][j] = dp[i-1][j-1] + 1
 			}

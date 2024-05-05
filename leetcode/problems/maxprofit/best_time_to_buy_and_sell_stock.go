@@ -1,9 +1,5 @@
 package maxprofit
 
-import (
-	"github.com/lovung/ds/maths"
-)
-
 // Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 func maxProfit(prices []int) int {
 	maxAfter := make([]int, len(prices))
@@ -16,7 +12,7 @@ func maxProfit(prices []int) int {
 	}
 	maxProfit := 0
 	for i := range prices {
-		maxProfit = maths.Max(maxProfit, maxAfter[i]-prices[i])
+		maxProfit = max(maxProfit, maxAfter[i]-prices[i])
 	}
 	return maxProfit
 }

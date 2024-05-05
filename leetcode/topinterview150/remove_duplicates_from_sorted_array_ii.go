@@ -1,7 +1,5 @@
 package topinterview150
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/remove-duplicates-from-sorted-array
 func removeDuplicates(nums []int) int {
 	return _removeDuplicates(nums, 1)
@@ -29,7 +27,7 @@ func _removeDuplicates(nums []int, maxE int) int {
 			break
 		}
 
-		l += maths.Min(maxE, maths.Max(r-(l+maxE), 1))
+		l += min(maxE, max(r-(l+maxE), 1))
 	}
 	return k
 }

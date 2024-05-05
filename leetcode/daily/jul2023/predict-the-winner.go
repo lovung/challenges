@@ -1,7 +1,5 @@
 package jul2023
 
-import "github.com/lovung/ds/maths"
-
 // https://leetcode.com/problems/predict-the-winner/editorial/
 // Solution 1:
 func PredictTheWinner(nums []int) bool {
@@ -12,7 +10,7 @@ func maxDiff(nums []int, l, r int) int {
 	if l == r {
 		return nums[l]
 	}
-	return maths.Max(
+	return max(
 		nums[l]-maxDiff(nums, l+1, r),
 		nums[r]-maxDiff(nums, l, r-1),
 	)
@@ -37,7 +35,7 @@ func maxDiff2(nums []int, l, r int, cache [][]int) int {
 	if l == r {
 		return nums[l]
 	}
-	cache[l][r] = maths.Max(
+	cache[l][r] = max(
 		nums[l]-maxDiff2(nums, l+1, r, cache),
 		nums[r]-maxDiff2(nums, l, r-1, cache),
 	)
@@ -56,7 +54,7 @@ func PredictTheWinner3(nums []int) bool {
 	for diff := 1; diff < n; diff++ {
 		for l := 0; l < n-diff; l++ {
 			r := l + diff
-			dp[l][r] = maths.Max(
+			dp[l][r] = max(
 				nums[l]-dp[l+1][r],
 				nums[r]-dp[l][r-1])
 		}
@@ -73,7 +71,7 @@ func PredictTheWinner4(nums []int) bool {
 	for diff := 1; diff < n; diff++ {
 		for l := 0; l < n-diff; l++ {
 			r := l + diff
-			dp[l] = maths.Max(
+			dp[l] = max(
 				nums[l]-dp[l+1],
 				nums[r]-dp[l])
 		}

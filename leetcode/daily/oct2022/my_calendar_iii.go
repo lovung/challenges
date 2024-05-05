@@ -2,8 +2,6 @@ package oct2022
 
 import (
 	"sort"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/my-calendar-iii/
@@ -36,11 +34,11 @@ func (this *MyCalendarThree) Book(start int, end int) int {
 		}
 		return this.events[i].cnt < this.events[j].cnt
 	})
-	max := 0
+	maxVal := 0
 	cnt := 0
 	for _, e := range this.events {
 		cnt += e.cnt
-		max = maths.Max(max, cnt)
+		maxVal = max(maxVal, cnt)
 	}
-	return max
+	return maxVal
 }

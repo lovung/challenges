@@ -4,7 +4,6 @@ import (
 	"container/heap"
 
 	"github.com/lovung/ds/heaps"
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/
@@ -52,7 +51,7 @@ func minimumOperations(nums []int) int {
 	}
 	switch {
 	case secondOdd == nil && secondEven == nil:
-		return maths.Min(firstOdd.Ref, firstEven.Ref)
+		return min(firstOdd.Ref, firstEven.Ref)
 	case secondOdd == nil && secondEven != nil:
 		return len(nums) - firstOdd.Ref - secondEven.Ref
 	case secondOdd != nil && secondEven == nil:

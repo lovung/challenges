@@ -29,7 +29,7 @@ func maximumSafenessFactor(grid [][]int) int {
 	for qThiefPos.Len() > 0 {
 		for n := qThiefPos.Len(); n > 0; n-- {
 			floodPos, _ := qThiefPos.DeQueue()
-			mat.DoWithNearBy(floodPos.i, floodPos.j, func(val, x, y int) {
+			mat.ForEachNearBy(floodPos.i, floodPos.j, func(val, x, y int) {
 				if val > level {
 					mat.UpdateAt(x, y, level)
 					qThiefPos.EnQueue(pos{x, y})
@@ -64,7 +64,7 @@ func isPathAbleToExist(mat *matrix.Matrix[int], lowestLevel int) bool {
 		if bfsPos.i == n-1 && bfsPos.j == n-1 {
 			return true
 		}
-		mat.DoWithNearBy(bfsPos.i, bfsPos.j, func(val, x, y int) {
+		mat.ForEachNearBy(bfsPos.i, bfsPos.j, func(val, x, y int) {
 			if !vis.At(x, y) && val >= lowestLevel {
 				vis.UpdateAt(x, y, true)
 				bfsQueue.EnQueue(pos{x, y})

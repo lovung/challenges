@@ -2,8 +2,6 @@ package hard
 
 import (
 	"sort"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/
@@ -57,7 +55,7 @@ func maxValueDpSolve(dp [][]int, events [][]int, n, pos, k int) int {
 			break
 		}
 	}
-	dp[pos][k] = maths.Max(maxValueDpSolve(dp, events, n, pos+1, k),
+	dp[pos][k] = max(maxValueDpSolve(dp, events, n, pos+1, k),
 		events[pos][2]+maxValueDpSolve(dp, events, n, i, k-1))
 	return dp[pos][k]
 }

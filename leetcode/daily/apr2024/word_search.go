@@ -1,14 +1,12 @@
 package apr2024
 
+import "github.com/lovung/ds/matrix"
+
 // More cases
 // 4. [["A","B","C","E"],["S","F","E","S"],["A","D","E","E"]]
 // "ABCESEEEFS"
 // 5. [["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"]]
 // "AAAAAAAAAAAAAAB"
-
-var dirs = [][]int{
-	{1, 0}, {0, 1}, {0, -1}, {-1, 0},
-}
 
 type xy struct {
 	x, y int
@@ -57,8 +55,8 @@ func dfs(board [][]byte, remain []byte, x, y int, visited *[6][6]bool) bool {
 		return true
 	}
 	(*visited)[x][y] = true
-	for _, dir := range dirs {
-		if !inBound(board, x+dir[0], y+dir[1]) {
+	for _, dir := range matrix.Dirs {
+		if !matrix.In(board, x+dir[0], y+dir[1]) {
 			continue
 		}
 		if (*visited)[x+dir[0]][y+dir[1]] {
@@ -73,11 +71,4 @@ func dfs(board [][]byte, remain []byte, x, y int, visited *[6][6]bool) bool {
 	}
 	(*visited)[x][y] = false
 	return false
-}
-
-func inBound[T any](mat [][]T, i, j int) bool {
-	if i < 0 || j < 0 || i >= len(mat) || j >= len(mat[0]) {
-		return false
-	}
-	return true
 }

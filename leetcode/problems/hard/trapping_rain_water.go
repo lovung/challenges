@@ -1,7 +1,5 @@
 package hard
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/trapping-rain-water/
 func trap(height []int) int {
 	n := len(height)
@@ -25,7 +23,7 @@ func trap(height []int) int {
 
 	trappedWater := 0
 	for i := range height {
-		trappedWater += maths.Min(highestLtoR[i], highestRtoL[i]) - height[i]
+		trappedWater += min(highestLtoR[i], highestRtoL[i]) - height[i]
 	}
 	return trappedWater
 }

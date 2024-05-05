@@ -2,8 +2,6 @@ package grind75
 
 import (
 	"sort"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/merge-intervals/
@@ -22,7 +20,7 @@ func merge(intervals [][]int) [][]int {
 		} else {
 			res[len(res)-1] = []int{
 				res[len(res)-1][0],
-				maths.Max(intervals[i][1], res[len(res)-1][1]),
+				max(intervals[i][1], res[len(res)-1][1]),
 			}
 		}
 	}

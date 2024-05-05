@@ -2,8 +2,6 @@ package jul2023
 
 import (
 	"math"
-
-	"github.com/lovung/ds/maths"
 )
 
 // Link: https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings
@@ -21,7 +19,7 @@ func minimumDeleteSum(s1 string, s2 string) int {
 func recursiveDelete(s, s2 string, i, sumS1, sumS2, curDeletedSum int, minRet *int, checkedSubString map[string]bool) {
 	if checkedSubString[s] || checkIfCanBeTrimmedString(s, s2) {
 		checkedSubString[s] = true
-		*minRet = maths.Min(*minRet, curDeletedSum+sumS2-(sumS1-curDeletedSum))
+		*minRet = min(*minRet, curDeletedSum+sumS2-(sumS1-curDeletedSum))
 	}
 	if len(s) == 0 || i >= len(s) {
 		return
@@ -94,7 +92,7 @@ func longestCommonSubsequenceMaxASCIISum(s1 string, s2 string) int {
 	for i := 1; i < len(s1); i++ {
 		for j := 1; j < len(s2); j++ {
 			if s1[i] != s2[j] {
-				dp[i][j] = maths.Max(dp[i-1][j], dp[i][j-1])
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 			} else {
 				dp[i][j] = dp[i-1][j-1] + int(s1[i])
 			}

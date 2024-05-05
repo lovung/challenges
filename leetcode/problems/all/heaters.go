@@ -30,7 +30,7 @@ func binarySearchNearestDistance(location int, sortedPoints []int) int {
 				return -dis
 			}
 			if location > sortedPoints[mid-1] {
-				return maths.Min(location-sortedPoints[mid-1], -dis)
+				return min(location-sortedPoints[mid-1], -dis)
 			}
 			r = mid - 1
 		case dis > 0:

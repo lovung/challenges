@@ -1,7 +1,6 @@
 package grind75
 
 import (
-	"github.com/lovung/ds/maths"
 	"github.com/lovung/ds/queue"
 )
 
@@ -37,7 +36,7 @@ func orangesRotting(grid [][]int) int {
 		if v == -1 {
 			return -1
 		}
-		maxDis = maths.Max(maxDis, v)
+		maxDis = max(maxDis, v)
 	}
 	return maxDis
 }
@@ -61,7 +60,7 @@ func floody(
 				cache[point{_i, _j}] = dis + 1
 				q.EnQueue(pointWithDis{_i, _j, cache[point{_i, _j}]})
 			} else {
-				cache[point{_i, _j}] = maths.Min(cache[point{_i, _j}], dis+1)
+				cache[point{_i, _j}] = min(cache[point{_i, _j}], dis+1)
 			}
 		}
 	}

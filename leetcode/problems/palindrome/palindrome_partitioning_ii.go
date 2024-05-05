@@ -1,7 +1,5 @@
 package palindrome
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/palindrome-partitioning-ii/
 // very slow solution
 // pass: 24/36
@@ -79,14 +77,14 @@ func minCut3(s string) int {
 			if start != 0 {
 				newCutAtEnd = dp[start-1] + 1
 			}
-			dp[end] = maths.Min(dp[end], newCutAtEnd)
+			dp[end] = min(dp[end], newCutAtEnd)
 		}
 		for start, end := mid-1, mid; start >= 0 && end < n && s[start] == s[end]; start, end = start-1, end+1 {
 			newCutAtEnd := 0
 			if start != 0 {
 				newCutAtEnd = dp[start-1] + 1
 			}
-			dp[end] = maths.Min(dp[end], newCutAtEnd)
+			dp[end] = min(dp[end], newCutAtEnd)
 		}
 	}
 	return dp[n-1]

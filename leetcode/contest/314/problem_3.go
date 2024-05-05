@@ -3,7 +3,6 @@ package contest
 import (
 	"strings"
 
-	"github.com/lovung/ds/maths"
 	"github.com/lovung/ds/stack"
 )
 
@@ -17,7 +16,7 @@ func robotWithString(s string) string {
 	minChar := byte('z')
 	minCharAfter := make([]byte, orgLenS)
 	for i := orgLenS - 1; i >= 0; i-- {
-		minChar = maths.Min(minChar, s[i])
+		minChar = min(minChar, s[i])
 		minCharAfter[i] = minChar
 	}
 
@@ -55,7 +54,7 @@ func robotWithString2(s string) string {
 	minChar := byte('z')
 	minCharAfter := make([]byte, orgLenS)
 	for i := orgLenS - 1; i >= 0; i-- {
-		minChar = maths.Min(minChar, s[i])
+		minChar = min(minChar, s[i])
 		minCharAfter[i] = minChar
 	}
 

@@ -1,7 +1,5 @@
 package medium
 
-import "github.com/lovung/ds/maths"
-
 // Link: https://leetcode.com/problems/interval-list-intersections/
 func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
 	res := make([][]int, 0)
@@ -15,8 +13,8 @@ func intervalIntersection(firstList [][]int, secondList [][]int) [][]int {
 			continue
 		}
 		res = append(res, []int{
-			maths.Max(firstList[i][0], secondList[j][0]),
-			maths.Min(firstList[i][1], secondList[j][1]),
+			max(firstList[i][0], secondList[j][0]),
+			min(firstList[i][1], secondList[j][1]),
 		})
 		switch {
 		case firstList[i][1] > secondList[j][1]:

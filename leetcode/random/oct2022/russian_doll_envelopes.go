@@ -3,7 +3,6 @@ package oct2022
 import (
 	"sort"
 
-	"github.com/lovung/ds/maths"
 	"github.com/lovung/ds/trees"
 )
 
@@ -17,14 +16,14 @@ func maxEnvelopes(envelopes [][]int) int {
 	})
 	dp := make([]int, len(envelopes))
 	maxVal := 1
-	segTree := trees.NewSegmentTreeWithArray(len(envelopes), max)
+	segTree := trees.NewSegmentTreeWithArray(len(envelopes), maxFn)
 
 	for i := 0; i < len(envelopes); i++ {
 		maxSmaller := 0
 		for j := i - 1; j >= 0; j-- {
 			if envelopes[i][0] > envelopes[j][0] &&
 				envelopes[i][1] > envelopes[j][1] {
-				maxSmaller = maths.Max(maxSmaller, dp[j])
+				maxSmaller = max(maxSmaller, dp[j])
 				if maxSmaller > segTree.Query(0, j) {
 					break
 				}
@@ -32,7 +31,7 @@ func maxEnvelopes(envelopes [][]int) int {
 		}
 		if maxSmaller > 0 {
 			dp[i] = maxSmaller + 1
-			maxVal = maths.Max(maxVal, dp[i])
+			maxVal = max(maxVal, dp[i])
 		} else {
 			dp[i] = 1
 		}
@@ -41,11 +40,8 @@ func maxEnvelopes(envelopes [][]int) int {
 	return maxVal
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+func maxFn(a, b int) int {
+	return max(a, b)
 }
 
 func maxEnvelopes2(envelopes [][]int) int {
