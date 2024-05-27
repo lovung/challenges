@@ -1,18 +1,8 @@
 package may2024
 
-// https://leetcode.com/problems/delete-node-in-a-linked-list/description/
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import "github.com/lovung/ds/lists"
 
-func deleteNode(node *ListNode) {
+// https://leetcode.com/problems/delete-node-in-a-linked-list/description/
+func deleteNode(node *lists.ListNode[int]) {
 	node.Val, node.Next = node.Next.Val, node.Next.Next
 }

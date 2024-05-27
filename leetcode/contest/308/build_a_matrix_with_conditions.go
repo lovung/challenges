@@ -1,6 +1,8 @@
 package contest
 
-import "github.com/lovung/ds/queue"
+import (
+	llq "github.com/emirpasic/gods/v2/queues/linkedlistqueue"
+)
 
 // Link: https://leetcode.com/problems/build-a-matrix-with-conditions/
 func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
@@ -37,16 +39,16 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 		adjList[con[i][0]] = append(adjList[con[i][0]], con[i][1])
 	}
 	res := make([]int, 0, k)
-	s := queue.NewSimpleQueue[int]()
+	s := llq.New[int]()
 	for i := 1; i <= k; i++ {
 		if parentCnt[i] == 0 {
-			s.EnQueue(i)
+			s.Enqueue(i)
 		}
 	}
 	// while S is not empty do
-	for s.Len() > 0 {
+	for !s.Empty() {
 		// remove a node n from S
-		n, _ := s.DeQueue()
+		n, _ := s.Dequeue()
 		// add n to L
 		res = append(res, n)
 		// for each node m with an edge e from n to m do
@@ -56,7 +58,7 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 			// f m has no other incoming edges then
 			if parentCnt[m] == 0 {
 				// insert m into S
-				s.EnQueue(m)
+				s.Enqueue(m)
 			}
 		}
 	}

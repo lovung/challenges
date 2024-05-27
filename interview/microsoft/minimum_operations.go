@@ -1,7 +1,7 @@
 package microsoft
 
 import (
-	"github.com/lovung/ds/queue"
+	llq "github.com/emirpasic/gods/v2/queues/linkedlistqueue"
 )
 
 // Change from x -> y int
@@ -35,13 +35,13 @@ type StepNode struct {
 // BFS -> queue
 func MinimumOperations(x, y int) int {
 	visited := make(map[int]bool)
-	q := queue.NewSimpleQueue[*StepNode]()
+	q := llq.New[*StepNode]()
 	if x == y {
 		return 0
 	}
 	putQueue(x, 0, q)
-	for q.Len() > 0 {
-		n, _ := q.DeQueue()
+	for !q.Empty() {
+		n, _ := q.Dequeue()
 		if visited[n.Val] {
 			continue
 		}
@@ -61,16 +61,16 @@ func MinimumOperations(x, y int) int {
 // 4:1       [10:1 7:2 5:2 12:2 5:2 3:2 8:2]
 // 10        [7:2 5:2 12:2 5:2 3:2 8:2]
 
-func putQueue(x, curStep int, q queue.Queue[*StepNode]) {
-	q.EnQueue(&StepNode{
+func putQueue(x, curStep int, q *llq.Queue[*StepNode]) {
+	q.Enqueue(&StepNode{
 		Val:   x + 1,
 		Steps: curStep + 1,
 	})
-	q.EnQueue(&StepNode{
+	q.Enqueue(&StepNode{
 		Val:   x - 1,
 		Steps: curStep + 1,
 	})
-	q.EnQueue(&StepNode{
+	q.Enqueue(&StepNode{
 		Val:   x * 2,
 		Steps: curStep + 1,
 	})
