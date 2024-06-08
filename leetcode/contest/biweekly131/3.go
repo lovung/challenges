@@ -1,7 +1,7 @@
 package biweekly131
 
 // https://leetcode.com/problems/find-the-xor-of-numbers-which-appear-twice/submissions/
-func queryResults(limit int, queries [][]int) []int {
+func queryResults(_ int, queries [][]int) []int {
 	type ball int
 	type color int
 	res := make([]int, len(queries))
