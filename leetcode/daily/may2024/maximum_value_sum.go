@@ -7,7 +7,7 @@ import (
 )
 
 // https://leetcode.com/problems/find-the-maximum-sum-of-node-values/
-func maximumValueSum(nums []int, k int, edges [][]int) int64 {
+func maximumValueSum(nums []int, k int, _ [][]int) int64 {
 	total, totalDiff := int64(0), int64(0)
 	for i := range nums {
 		total += int64(nums[i])
