@@ -12,11 +12,7 @@ func countOfPeaks(nums []int, queries [][]int) []int {
 	res := make([]int, 0, len(queries))
 	for _, q := range queries {
 		if q[0] == 1 {
-			res = append(res,
-				max(0,
-					st.Query(q[1], q[2]+1)-
-						st.Query(q[1], q[1]+1)-
-						st.Query(q[2], q[2]+1)))
+			res = append(res, max(0, st.Query(q[1]+1, q[2])))
 		} else {
 			nums[q[1]] = q[2]
 			for i := q[1] - 1; i <= q[1]+1; i++ {
