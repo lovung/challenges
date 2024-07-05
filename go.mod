@@ -1,6 +1,6 @@
 module github.com/lovung/challenges
 
-go 1.22
+go 1.23rc1
 
 require (
 	github.com/emirpasic/gods/v2 v2.0.0-alpha
