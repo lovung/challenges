@@ -1,7 +1,5 @@
 package may2024
 
-import "slices"
-
 func subsetXORSum(nums []int) int {
 	res := 0
 	for i := range 1 << (len(nums)) {
@@ -13,7 +11,8 @@ func subsetXORSum(nums []int) int {
 func xorWithBitmask(nums []int, bitMask int) int {
 	res := 0
 	bit := 1
-	for _, n := range slices.Backward(nums) {
+	for i := len(nums) - 1; i >= 0; i++ {
+		n := nums[i]
 		if bitMask&bit != 0 {
 			res ^= n
 		}

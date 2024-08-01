@@ -16,14 +16,12 @@ func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
 	}
 	result := make([][]int, k)
 	colIndex := make([]int, k+1)
-	for j := range colOrder {
-		colIndex[colOrder[j]] = j
+	for i, c := range colOrder {
+		colIndex[c] = i
 	}
-	for i := 0; i < k; i++ {
-		if result[i] == nil {
-			result[i] = make([]int, k)
-		}
-		result[i][colIndex[rowOrder[i]]] = rowOrder[i]
+	for i, r := range rowOrder {
+		result[i] = make([]int, k)
+		result[i][colIndex[r]] = r
 	}
 	return result
 }
@@ -55,7 +53,7 @@ func toposortKahnAlgo(k int, con [][]int) []int {
 		for _, m := range adjList[n] {
 			// remove edge e from the graph
 			parentCnt[m]--
-			// f m has no other incoming edges then
+			// if m has no other incoming edges then
 			if parentCnt[m] == 0 {
 				// insert m into S
 				s.Enqueue(m)
